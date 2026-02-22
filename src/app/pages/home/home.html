@@ -1,0 +1,44 @@
+<div class="home">
+  <section class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content p-3 md:p-5">
+      <h1 class="hero-title">VESTIZO</h1>
+      <p class="hero-kicker">Moda exclusiva</p>
+
+      <p class="hero-subtitle">
+        Elegancia para cada momento especial.
+      </p>
+
+      <div class="hero-actions flex flex-wrap justify-content-center md:justify-content-start gap-2">
+        <a routerLink="/catalogo" class="btn btn--primary">Ver catálogo</a>
+        <a routerLink="/informacion" class="btn btn--secondary">Visítanos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-header__title">Nuevas colecciones</h2>
+        <p class="section-header__subtitle">
+          Descubre las piezas más recientes seleccionadas especialmente para ti.
+        </p>
+      </div>
+
+      <div class="featured-grid grid grid-nogutter md:grid">
+        @for (product of featuredProducts; track product.id) {
+          <div class="col-12 sm:col-6 lg:col-4 p-2">
+            <app-product-card [product]="product" class="fade-in-up w-full"></app-product-card>
+          </div>
+        }
+      </div>
+
+      <div class="featured-footer flex justify-content-center mt-4">
+        <a routerLink="/catalogo" class="btn btn--secondary">
+          Ver catálogo completo
+        </a>
+      </div>
+    </div>
+  </section>
+</div>

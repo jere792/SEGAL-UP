@@ -1,0 +1,12 @@
+<div class="loading-spinner" 
+     [class.loading-spinner--fullscreen]="fullscreen"
+     [class.loading-spinner--sm]="size === 'sm'"
+     [class.loading-spinner--lg]="size === 'lg'"
+     [class.loading-spinner--white]="color === 'white'">
+  <div class="loading-spinner__wrapper">
+    <div class="loading-spinner__circle"></div>
+    @if (message) {
+      <p class="loading-spinner__message">{{ message }}</p>
+    }
+  </div>
+</div>

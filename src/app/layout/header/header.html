@@ -1,0 +1,52 @@
+<header class="header" [class.scrolled]="isScrolled">
+  <div class="header-container">
+    <div class="header-logo">
+      <a routerLink="/" (click)="closeMobileMenu()">
+        <img src="assets/logo/LOGO.jpg" alt="VESTIZO Moda Exclusiva">
+      </a>
+    </div>
+
+    <nav class="header-nav" [class.mobile-open]="isMobileMenuOpen">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a routerLink="/" 
+             routerLinkActive="active" 
+             [routerLinkActiveOptions]="{exact: true}" 
+             (click)="closeMobileMenu()">
+            Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/catalogo" 
+             routerLinkActive="active" 
+             (click)="closeMobileMenu()">
+            Catálogo
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/informacion" 
+             routerLinkActive="active" 
+             (click)="closeMobileMenu()">
+            Información
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/preguntas-frecuentes" 
+             routerLinkActive="active" 
+             (click)="closeMobileMenu()">
+            FAQ
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <button class="mobile-menu-toggle" 
+            [class.open]="isMobileMenuOpen"
+            (click)="toggleMobileMenu()"
+            aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>

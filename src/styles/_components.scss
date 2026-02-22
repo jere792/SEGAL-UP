@@ -1,0 +1,245 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.btn {
+  @include button-base;
+  
+  &--primary {
+    @include button-primary;
+  }
+  
+  &--secondary {
+    @include button-secondary;
+  }
+  
+  &--outline {
+    @include button-base;
+    background-color: transparent;
+    color: $gray-dark;
+    border: 2px solid $gray-medium;
+    
+    &:hover:not(:disabled) {
+      border-color: $gray-dark;
+      color: $black;
+    }
+  }
+  
+  &--link {
+    @include button-base;
+    padding: 0;
+    background: none;
+    color: $primary-gold-dark;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  &--sm {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-sm;
+  }
+  
+  &--lg {
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-lg;
+  }
+  
+  &--full {
+    width: 100%;
+  }
+  
+  &--icon {
+    padding: $spacing-sm;
+    aspect-ratio: 1;
+  }
+}
+
+.card {
+  @include card;
+  padding: $spacing-lg;
+  
+  &__header {
+    margin-bottom: $spacing-md;
+  }
+  
+  &__title {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-xs;
+  }
+  
+  &__body {
+    margin-bottom: $spacing-md;
+  }
+  
+  &__footer {
+    padding-top: $spacing-md;
+    border-top: 1px solid $gray-light;
+  }
+  
+  &--hover {
+    @include hover-lift;
+  }
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+  
+  @include tablet-down {
+    margin-bottom: $spacing-xl;
+  }
+  
+  &__title {
+    @include heading($font-size-4xl);
+    margin-bottom: $spacing-sm;
+    
+    @include tablet-down {
+      font-size: $font-size-3xl;
+    }
+  }
+  
+  &__subtitle {
+    font-size: $font-size-lg;
+    color: $gray-medium;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: $radius-full;
+  background-color: $primary-gold-light;
+  color: $primary-gold-dark;
+  
+  &--success {
+    background-color: lighten($success, 35%);
+    color: darken($success, 10%);
+  }
+  
+  &--warning {
+    background-color: lighten($warning, 35%);
+    color: darken($warning, 10%);
+  }
+  
+  &--error {
+    background-color: lighten($error, 35%);
+    color: darken($error, 10%);
+  }
+}
+
+.divider {
+  height: 1px;
+  background-color: $gray-light;
+  margin: $spacing-lg 0;
+  
+  &--thick {
+    height: 2px;
+  }
+  
+  &--vertical {
+    width: 1px;
+    height: auto;
+    margin: 0 $spacing-md;
+  }
+}
+
+.grid {
+  @include grid-responsive(1, 2, 3);
+  
+  &--2 {
+    @include grid-responsive(1, 2, 2);
+  }
+  
+  &--4 {
+    @include grid-responsive(2, 3, 4);
+  }
+  
+  &--auto {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: $spacing-lg;
+  }
+}
+
+.spinner {
+  @include flex-center;
+  
+  &__circle {
+    width: 40px;
+    height: 40px;
+    border: 3px solid $gray-light;
+    border-top-color: $primary-gold;
+    border-radius: $radius-full;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  &--sm &__circle {
+    width: 24px;
+    height: 24px;
+    border-width: 2px;
+  }
+  
+  &--lg &__circle {
+    width: 60px;
+    height: 60px;
+    border-width: 4px;
+  }
+}
+
+.overlay {
+  @include overlay($bg-overlay, 0.8);
+  @include flex-center;
+  position: fixed;
+  z-index: $z-index-modal-backdrop;
+  
+  &--blur {
+    @include backdrop-blur(5px);
+  }
+}
+
+.aspect-square {
+  @include aspect-ratio(1, 1);
+}
+
+.aspect-video {
+  @include aspect-ratio(16, 9);
+}
+
+.aspect-portrait {
+  @include aspect-ratio(3, 4);
+}
+
+.skeleton {
+  @include shimmer;
+  border-radius: $radius-sm;
+  
+  &--text {
+    height: 1em;
+    margin-bottom: $spacing-xs;
+  }
+  
+  &--title {
+    height: 2em;
+    margin-bottom: $spacing-sm;
+  }
+  
+  &--avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-full;
+  }
+  
+  &--image {
+    width: 100%;
+    padding-top: 75%;
+  }
+}

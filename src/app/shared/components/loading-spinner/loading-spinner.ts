@@ -1,0 +1,16 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-loading-spinner',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './loading-spinner.html',
+  styleUrl: './loading-spinner.scss',
+})
+export class LoadingSpinner {
+  @Input() size: 'sm' | 'md' | 'lg' = 'md';
+  @Input() color: 'primary' | 'white' = 'primary';
+  @Input() fullscreen: boolean = false;
+  @Input() message?: string;
+}

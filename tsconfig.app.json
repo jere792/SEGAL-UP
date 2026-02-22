@@ -10,7 +10,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/app/core/data/products.data"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]

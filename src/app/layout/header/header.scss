@@ -1,0 +1,214 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $z-index-header;
+  transition: background-color $transition-normal, 
+              backdrop-filter $transition-normal,
+              box-shadow $transition-normal;
+  background-color: transparent;
+
+  &.scrolled {
+    background-color: rgba($white, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: $shadow-sm;
+
+    .header-logo img {
+      height: 45px;
+
+      @include tablet-down {
+        height: 35px;
+      }
+    }
+
+    .nav-list a {
+      color: $gray-dark;
+
+      &:hover {
+        color: $primary-gold-dark;
+      }
+
+      &.active {
+        color: $primary-gold-dark;
+      }
+    }
+
+    .mobile-menu-toggle span {
+      background-color: $gray-dark;
+    }
+  }
+
+  .header-container {
+    @include container;
+    @include flex-between;
+    height: $header-height;
+    transition: height $transition-normal;
+
+    @include tablet-down {
+      height: $header-height-mobile;
+    }
+  }
+
+  .header-logo {
+    z-index: $z-index-header + 1;
+
+    a {
+      display: block;
+    }
+
+    img {
+      height: 50px;
+      width: auto;
+      transition: height $transition-normal;
+
+      @include tablet-down {
+        height: 40px;
+      }
+    }
+  }
+
+  .header-nav {
+    @include tablet-down {
+      position: fixed;
+      top: $header-height-mobile;
+      left: 0;
+      width: 100%;
+      height: calc(100vh - #{$header-height-mobile});
+      background-color: $white;
+      transform: translateX(-100%);
+      transition: transform $transition-normal;
+      box-shadow: $shadow-md;
+      overflow-y: auto;
+      @include custom-scrollbar;
+    }
+
+    &.mobile-open {
+      transform: translateX(0);
+    }
+  }
+
+  .nav-list {
+    display: flex;
+    gap: $spacing-lg;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include tablet-down {
+      flex-direction: column;
+      gap: 0;
+      padding: $spacing-lg 0;
+    }
+  }
+
+  .nav-item {
+    a {
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      font-weight: $font-weight-medium;
+      color: $white;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color $transition-fast;
+      position: relative;
+      padding: $spacing-sm 0;
+      display: block;
+
+      @include tablet-down {
+        padding: $spacing-md $spacing-xl;
+        color: $gray-dark;
+        font-size: $font-size-lg;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: $primary-gold;
+        transition: width $transition-normal;
+
+        @include tablet-down {
+          display: none;
+        }
+      }
+
+      &:hover {
+        color: $primary-gold;
+
+        &::after {
+          width: 100%;
+        }
+
+        @include tablet-down {
+          background-color: $gray-light;
+          color: $primary-gold-dark;
+        }
+      }
+
+      &.active {
+        color: $primary-gold;
+
+        &::after {
+          width: 100%;
+        }
+
+        @include tablet-down {
+          background-color: $primary-cream;
+          color: $primary-gold-dark;
+          font-weight: $font-weight-semibold;
+        }
+      }
+    }
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: $z-index-header + 1;
+
+    @include tablet-down {
+      display: flex;
+    }
+
+    span {
+      width: 100%;
+      height: 3px;
+      background-color: $white;
+      transition: all $transition-normal;
+      border-radius: 2px;
+    }
+
+    &.open {
+      span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+
+      span:nth-child(2) {
+        opacity: 0;
+      }
+
+      span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+    }
+  }
+}
+
+body.menu-open {
+  overflow: hidden;
+}
