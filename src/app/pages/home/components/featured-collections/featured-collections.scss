@@ -1,0 +1,107 @@
+@use '../../../../../styles/tokens' as *;
+@use '../../../../../styles/mixins' as *;
+@use "sass:color";
+
+.featured {
+  background: linear-gradient(180deg, $bg-primary 0%, $bg-secondary 100%);
+  padding: $spacing-4xl 0;
+  border-top: 1px solid color.scale($primary-gold, $alpha: -80%);
+
+  @include tablet-down {
+    padding: $spacing-3xl 0;
+  }
+
+  @include mobile-only {
+    padding: $spacing-2xl 0;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: $spacing-3xl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include tablet-down {
+      margin-bottom: $spacing-2xl;
+    }
+
+    &__kicker {
+      font-family: $font-primary;
+      font-size: $font-size-xs;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: $primary-gold-dark;
+      margin-bottom: $spacing-sm;
+      display: block;
+    }
+
+    &__title {
+      @include heading($font-size-4xl);
+      margin-bottom: $spacing-sm;
+      color: $black;
+
+      @include tablet-down {
+        font-size: $font-size-3xl;
+      }
+    }
+
+    &__subtitle {
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      color: $gray-dark;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: $line-height-relaxed;
+    }
+
+    &__divider {
+      width: 40px;
+      height: 1px;
+      background-color: $primary-gold;
+      margin-top: $spacing-md;
+    }
+  }
+
+  .featured-carousel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-lg;
+
+    @include tablet-down {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-md;
+    }
+
+    @include mobile-only {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: $spacing-md;
+      padding: 0 $spacing-md $spacing-sm $spacing-md;
+      margin: 0 calc(-1 * $spacing-md);
+      -webkit-overflow-scrolling: touch;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      
+      scrollbar-width: none;
+    }
+
+    .featured-item {
+      @include mobile-only {
+        flex: 0 0 75%;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+      }
+    }
+  }
+
+  .featured-footer {
+    margin-top: $spacing-2xl;
+    display: flex;
+    justify-content: center;
+  }
+}

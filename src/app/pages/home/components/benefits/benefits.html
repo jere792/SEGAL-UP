@@ -1,0 +1,15 @@
+<section class="benefits section">
+  <div class="container">
+    <div class="benefits-grid">
+      @for (benefit of benefits; track benefit.title) {
+        <div class="benefit-card fade-in-up">
+          <div class="benefit-icon" [attr.data-color]="benefit.colorClass">
+            <i [class]="'pi ' + benefit.icon"></i>
+          </div>
+          <h3 class="benefit-title">{{ benefit.title }}</h3>
+          <p class="benefit-description">{{ benefit.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

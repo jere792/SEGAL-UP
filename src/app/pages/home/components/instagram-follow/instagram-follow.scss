@@ -1,0 +1,81 @@
+@use '../../../../../styles/tokens' as *;
+@use '../../../../../styles/mixins' as *;
+
+.instagram-follow {
+  background-color: $bg-primary;
+  padding: $spacing-xl 0;
+  border-top: 1px solid $gray-light;
+
+  @include mobile-only {
+    padding: $spacing-lg 0;
+  }
+
+  .instagram-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-md;
+
+    @include mobile-only {
+      gap: $spacing-sm;
+    }
+  }
+
+  .instagram-label {
+    font-family: $font-primary;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $black;
+    text-transform: lowercase;
+
+    @include mobile-only {
+      font-size: $font-size-base;
+    }
+  }
+
+  .instagram-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $black;
+    border-radius: $radius-md;
+    transition: transform 0.3s $easing-out;
+
+    i {
+      font-size: 1.5rem;
+      color: $white;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    @include mobile-only {
+      width: 36px;
+      height: 36px;
+
+      i {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  .instagram-handle {
+    font-family: $font-primary;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $black;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #e1306c;
+    }
+
+    @include mobile-only {
+      font-size: $font-size-base;
+    }
+  }
+}

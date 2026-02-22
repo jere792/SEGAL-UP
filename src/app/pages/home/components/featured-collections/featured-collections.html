@@ -1,0 +1,26 @@
+<section class="featured section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__kicker">Temporada 2026</span>
+      <h2 class="section-header__title">Nuevas Colecciones</h2>
+      <p class="section-header__subtitle">
+        Descubre las piezas más recientes, diseñadas para resaltar tu elegancia en cada momento.
+      </p>
+      <div class="section-header__divider"></div>
+    </div>
+
+    <div class="featured-carousel">
+      @for (product of featuredProducts; track product.id) {
+        <div class="featured-item">
+          <app-product-card [product]="product" class="fade-in-up w-full h-full block"></app-product-card>
+        </div>
+      }
+    </div>
+
+    <div class="featured-footer flex justify-content-center mt-5">
+      <a routerLink="/catalogo" class="btn btn--secondary">
+        Explorar Colección Completa
+      </a>
+    </div>
+  </div>
+</section>

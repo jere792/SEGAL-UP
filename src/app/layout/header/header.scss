@@ -7,9 +7,10 @@
   left: 0;
   width: 100%;
   z-index: $z-index-header;
-  transition: background-color $transition-normal, 
-              backdrop-filter $transition-normal,
-              box-shadow $transition-normal;
+  transition:
+    background-color $transition-normal,
+    backdrop-filter $transition-normal,
+    box-shadow $transition-normal;
   background-color: transparent;
 
   &.scrolled {
@@ -17,11 +18,19 @@
     backdrop-filter: blur(10px);
     box-shadow: $shadow-sm;
 
-    .header-logo img {
-      height: 45px;
+    .header-container {
+      height: 80px;
 
       @include tablet-down {
-        height: 35px;
+        height: $header-height-mobile;
+      }
+    }
+
+    .header-logo img {
+      height: 135px;
+
+      @include tablet-down {
+        height: 45px;
       }
     }
 
@@ -45,28 +54,37 @@
   .header-container {
     @include container;
     @include flex-between;
-    height: $header-height;
+    height: 120px;
     transition: height $transition-normal;
+    padding-left: $spacing-md;
+    padding-right: $spacing-xl;
 
     @include tablet-down {
       height: $header-height-mobile;
+      padding-left: $spacing-sm;
+      padding-right: $spacing-md;
     }
   }
 
   .header-logo {
     z-index: $z-index-header + 1;
+    margin-left: -$spacing-2xl;
+
+    @include tablet-down {
+      margin-left: 0;
+    }
 
     a {
       display: block;
     }
 
     img {
-      height: 50px;
+      height: 100px;
       width: auto;
       transition: height $transition-normal;
 
       @include tablet-down {
-        height: 40px;
+        height: 55px;
       }
     }
   }

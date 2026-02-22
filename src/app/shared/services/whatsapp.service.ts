@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../interfaces';
+import { Product } from '../interfaces/product.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WhatsappService {
-  private readonly phoneNumber = '+51 924911967';
+  // Asegúrate de que el número esté sin el '+' ni espacios para la API de WhatsApp
+  private readonly phoneNumber = '51924911967'; 
 
   enviarConsulta(producto: Product): void {
     const mensaje = this.generarMensaje(producto);
@@ -19,11 +20,14 @@ export class WhatsappService {
   }
 
   private generarMensaje(producto: Product): string {
-    return `Hola! Estoy interesado en el siguiente producto:
-
-*${producto.nombre}*
-Código: ${producto.id}
-
-¿Podrías darme más información sobre disponibilidad y precio?`;
+    let mensaje = `¡Hola Vestizo! 🌸\n\nVengo desde su página web y estoy interesada en:\n\n👗 *${producto.nombre}*`;
+    
+    if (producto.precio) {
+      mensaje += `\n💰 Precio: S/ ${producto.precio.toFixed(2)}`;
+    }
+    
+    mensaje += `\n\n¿Me podrían confirmar si tienen disponibilidad de tallas por favor? ✨`;
+    
+    return mensaje;
   }
 }

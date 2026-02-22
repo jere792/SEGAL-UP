@@ -1,0 +1,220 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.footer {
+  background-color: $black;
+  color: $white;
+
+  .footer-main {
+    padding: $spacing-3xl 0 $spacing-2xl;
+
+    @include tablet-down {
+      padding: $spacing-2xl 0 $spacing-xl;
+    }
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-2xl;
+
+    @include tablet-down {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-xl;
+    }
+
+    @include mobile-only {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+    }
+  }
+
+  .footer-column {
+    .footer-title {
+      font-family: $font-secondary;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $primary-gold;
+      margin-bottom: $spacing-md;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin-bottom: $spacing-sm;
+      }
+
+      .footer-link {
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        color: $gray-light;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $primary-gold;
+        }
+      }
+    }
+  }
+
+  .social-links {
+    display: flex;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-lg;
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: $radius-md;
+      transition: all 0.3s ease;
+
+      i {
+        font-size: 1.25rem;
+        color: $white;
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+
+        &[data-social="facebook"] {
+          background-color: #1877f2;
+        }
+
+        &[data-social="instagram"] {
+          background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        &[data-social="tiktok"] {
+          background-color: #000000;
+        }
+      }
+    }
+  }
+
+  .claims-button {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    background-color: $primary-gold;
+    color: $black;
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    border-radius: $radius-md;
+    transition: all 0.3s ease;
+
+    i {
+      font-size: 1rem;
+    }
+
+    &:hover {
+      background-color: $primary-gold-dark;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($primary-gold, 0.3);
+    }
+
+    @include mobile-only {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: $spacing-lg 0;
+
+    @include mobile-only {
+      padding: $spacing-md 0;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: $spacing-lg;
+
+      @include tablet-down {
+        flex-direction: column;
+        text-align: center;
+        gap: $spacing-md;
+      }
+    }
+
+    .footer-copyright {
+      p {
+        font-family: $font-primary;
+        font-size: $font-size-xs;
+        color: $gray-medium;
+        margin: 0;
+      }
+    }
+
+    .footer-payments {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+
+      @include mobile-only {
+        flex-direction: column;
+        gap: $spacing-xs;
+      }
+
+      .payments-label {
+        font-family: $font-primary;
+        font-size: $font-size-xs;
+        color: $gray-medium;
+        white-space: nowrap;
+      }
+
+      .payment-icons {
+        display: flex;
+        gap: $spacing-sm;
+        flex-wrap: wrap;
+        align-items: center;
+
+        @include mobile-only {
+          justify-content: center;
+        }
+      }
+
+      .payment-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 10px;
+        background-color: $white;
+        border-radius: $radius-sm;
+        height: 32px;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+        }
+
+        .payment-logo {
+          height: 20px;
+          width: auto;
+          object-fit: contain;
+          filter: grayscale(100%);
+          opacity: 0.8;
+          transition: all 0.3s ease;
+        }
+
+        &:hover .payment-logo {
+          filter: grayscale(0%);
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

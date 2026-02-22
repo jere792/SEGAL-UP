@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { Header } from './layout/header/header';
+import { Footer } from './layout/footer/footer';
 
-
-//import { Footer } from './layout/footer/footer';
 import { WhatsappButton } from './shared/components/whatsapp-button/whatsapp-button';
 
 @Component({
@@ -13,7 +12,7 @@ import { WhatsappButton } from './shared/components/whatsapp-button/whatsapp-but
   imports: [
     RouterOutlet,
     Header,
-    //Footer,
+    Footer,
     WhatsappButton
   ],
   templateUrl: './app.html',

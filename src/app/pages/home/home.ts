@@ -1,22 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Product } from '../../shared/interfaces';
-import { products } from '../../core/data/products.data/products.data';
-import { ProductCardComponent } from '../../shared/components/product-card/product-card';
 
+import { WhatsappButton } from '../../shared/components/whatsapp-button/whatsapp-button';
+
+import { Hero } from './components/hero/hero';
+import { FeaturedCollections } from './components/featured-collections/featured-collections';
+import { Benefits } from './components/benefits/benefits';
+import { InstagramFollow } from './components/instagram-follow/instagram-follow';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ProductCardComponent],
+  imports: [CommonModule, WhatsappButton, Hero, FeaturedCollections, Benefits, InstagramFollow],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
-export class HomeComponent implements OnInit {
-  featuredProducts: Product[] = [];
+export class Home {
 
-  ngOnInit(): void {
-    this.featuredProducts = [...products]
-      .sort((a, b) => b.fechaCreacion.getTime() - a.fechaCreacion.getTime())
-      .slice(0, 6);
-  }
 }

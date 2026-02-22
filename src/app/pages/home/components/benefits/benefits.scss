@@ -1,0 +1,108 @@
+@use '../../../../../styles/tokens' as *;
+@use '../../../../../styles/mixins' as *;
+
+.benefits {
+  background-color: $bg-secondary;
+  padding: $spacing-3xl 0;
+
+  @include tablet-down {
+    padding: $spacing-2xl 0;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-xl;
+
+    @include tablet-down {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-lg;
+    }
+
+    @include mobile-only {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  .benefit-card {
+    text-align: center;
+    padding: $spacing-lg;
+    transition: transform 0.3s $easing-out;
+
+    &:hover {
+      transform: translateY(-4px);
+
+      .benefit-icon {
+        &[data-color="blue"] {
+          background-color: #3b82f6;
+        }
+        &[data-color="green"] {
+          background-color: #25d366;
+        }
+        &[data-color="gold"] {
+          background-color: $primary-gold;
+        }
+        &[data-color="purple"] {
+          background-color: #9333ea;
+        }
+
+        i {
+          color: $white;
+        }
+      }
+    }
+
+    .benefit-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto $spacing-md;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $radius-full;
+      transition: background-color 0.3s ease;
+
+      &[data-color="blue"] {
+        background-color: #dbeafe;
+        i { color: #1e40af; }
+      }
+
+      &[data-color="green"] {
+        background-color: #d1fae5;
+        i { color: #065f46; }
+      }
+
+      &[data-color="gold"] {
+        background-color: $primary-gold-light;
+        i { color: $primary-gold-dark; }
+      }
+
+      &[data-color="purple"] {
+        background-color: #f3e8ff;
+        i { color: #6b21a8; }
+      }
+
+      i {
+        font-size: 2.5rem;
+        transition: color 0.3s ease;
+      }
+    }
+
+    .benefit-title {
+      font-family: $font-secondary;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $black;
+      margin-bottom: $spacing-xs;
+    }
+
+    .benefit-description {
+      font-family: $font-primary;
+      font-size: $font-size-sm;
+      color: $gray-medium;
+      line-height: $line-height-normal;
+      margin: 0;
+    }
+  }
+}
