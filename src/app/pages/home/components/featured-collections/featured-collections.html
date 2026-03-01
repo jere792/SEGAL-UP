@@ -1,26 +1,46 @@
-<section class="featured section">
+<section class="new-arrivals section">
   <div class="container">
+
     <div class="section-header">
-      <span class="section-header__kicker">Temporada 2026</span>
-      <h2 class="section-header__title">Nuevas Colecciones</h2>
-      <p class="section-header__subtitle">
-        Descubre las piezas más recientes, diseñadas para resaltar tu elegancia en cada momento.
-      </p>
-      <div class="section-header__divider"></div>
+      <span class="section-label">Temporada 2026</span>
+      <h2 class="section-title">Nuevas Colecciones</h2>
+      <p class="section-subtitle">Descubre las piezas más recientes, diseñadas para resaltar tu elegancia en cada momento.</p>
     </div>
 
-    <div class="featured-carousel">
-      @for (product of featuredProducts; track product.id) {
-        <div class="featured-item">
-          <app-product-card [product]="product" class="fade-in-up w-full h-full block"></app-product-card>
+    <div class="arrivals-grid">
+      @for (product of products; track product.id) {
+        <div class="arrival-card">
+          <div class="card-image">
+            <a [routerLink]="['/producto', product.id]">
+              <img [src]="product.imagenes[0]" [alt]="product.nombre" loading="lazy" />
+            </a>
+            @if (product.destacado) {
+              <span class="badge badge--new">Exclusivo</span>
+            }
+            <div class="card-overlay">
+              <button class="btn-whatsapp" (click)="contactar(product)">
+                <i class="pi pi-whatsapp"></i>
+                Consultar
+              </button>
+            </div>
+          </div>
+          <div class="card-info">
+            <span class="card-category">{{ product.categoria }}</span>
+            <h3 class="card-name">{{ product.nombre }}</h3>
+            @if (product.precio) {
+              <p class="card-price">S/ {{ product.precio }}</p>
+            }
+          </div>
         </div>
       }
     </div>
 
-    <div class="featured-footer flex justify-content-center mt-5">
-      <a routerLink="/catalogo" class="btn btn--secondary">
-        Explorar Colección Completa
+    <div class="section-footer">
+      <a routerLink="/catalogo" class="btn-ver-todo">
+        Ver todo el catálogo
+        <i class="pi pi-arrow-right"></i>
       </a>
     </div>
+
   </div>
 </section>

@@ -18,6 +18,6 @@ export class WhatsappButton {
   constructor(private whatsappService: WhatsappService) {}
 
   abrirWhatsapp(): void {
-    this.whatsappService.enviarConsultaGeneral(this.message);
+    this.whatsappService.openGeneral(this.message);
   }
 }

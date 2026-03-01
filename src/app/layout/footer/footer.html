@@ -2,8 +2,18 @@
   <div class="footer-main">
     <div class="container">
       <div class="footer-grid">
-        
-        <!-- Columna 1: Sobre Nosotros -->
+        <!-- Columna 1: Logo -->
+        <div class="footer-column footer-column--logo">
+          <a routerLink="/" class="footer-logo-link">
+            <img
+              src="assets/layout/header/LOGO-TRANSPARENTE.png"
+              alt="Vestizo Logo"
+              class="footer-logo"
+            />
+          </a>
+        </div>
+
+        <!-- Columna 2: Sobre Nosotros -->
         <div class="footer-column">
           <h3 class="footer-title">Sobre Nosotros</h3>
           <ul class="footer-links">
@@ -17,7 +27,7 @@
           </ul>
         </div>
 
-        <!-- Columna 2: Soporte -->
+        <!-- Columna 3: Soporte -->
         <div class="footer-column">
           <h3 class="footer-title">Soporte</h3>
           <ul class="footer-links">
@@ -31,7 +41,7 @@
           </ul>
         </div>
 
-        <!-- Columna 3: Legal -->
+        <!-- Columna 4: Legal -->
         <div class="footer-column">
           <h3 class="footer-title">Legal</h3>
           <ul class="footer-links">
@@ -45,14 +55,14 @@
           </ul>
         </div>
 
-        <!-- Columna 4: Síguenos + Libro de Reclamaciones -->
+        <!-- Columna 5: Síguenos -->
         <div class="footer-column">
           <h3 class="footer-title">Síguenos</h3>
           <div class="social-links">
             @for (social of socialMedia; track social.url) {
-              <a 
-                [href]="social.url" 
-                target="_blank" 
+              <a
+                [href]="social.url"
+                target="_blank"
                 rel="noopener noreferrer"
                 [attr.aria-label]="social.label"
                 class="social-link"
@@ -62,47 +72,28 @@
               </a>
             }
           </div>
-
-          <!-- Botón Libro de Reclamaciones -->
-          <a 
-            routerLink="/libro-reclamaciones" 
-            class="claims-button"
-          >
-            <i class="pi pi-file-edit"></i>
-            <span>Libro de Reclamaciones</span>
-          </a>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- Footer Bottom -->
   <div class="footer-bottom">
     <div class="container">
       <div class="footer-bottom-content">
-        
-        <!-- Copyright -->
         <div class="footer-copyright">
-          <p>Almendra © {{ currentYear }}. Todos los derechos reservados</p>
+          <p>Vestizo © {{ currentYear }}. Todos los derechos reservados</p>
         </div>
 
-        <!-- Medios de Pago -->
         <div class="footer-payments">
           <span class="payments-label">Medios de pago:</span>
           <div class="payment-icons">
             @for (payment of paymentMethods; track payment.name) {
               <div class="payment-item" [attr.title]="payment.name">
-                <img 
-                  [src]="payment.image" 
-                  [alt]="payment.name"
-                  class="payment-logo"
-                />
+                <img [src]="payment.image" [alt]="payment.name" class="payment-logo" />
               </div>
             }
           </div>
         </div>
-
       </div>
     </div>
   </div>

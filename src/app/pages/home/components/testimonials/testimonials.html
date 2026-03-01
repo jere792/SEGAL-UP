@@ -1,0 +1,45 @@
+<section class="testimonials section">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-label">Lo que dicen</span>
+      <h2 class="section-title">Nuestras Clientas</h2>
+      <p class="section-subtitle">Experiencias reales de mujeres que confían en Vestizo</p>
+    </div>
+
+    <div class="testimonials-grid">
+      @for (t of testimonials; track t.name) {
+        <div class="testimonial-card fade-in-up">
+
+          <div class="testimonial-stars">
+            @for (star of getStars(t.rating); track $index) {
+              <i class="pi pi-star-fill"></i>
+            }
+          </div>
+
+          <p class="testimonial-text">"{{ t.text }}"</p>
+
+          @if (t.product) {
+            <span class="testimonial-product">
+              <i class="pi pi-tag"></i> {{ t.product }}
+            </span>
+          }
+
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <img [src]="t.avatar" [alt]="t.name" />
+            </div>
+            <div class="author-info">
+              <strong class="author-name">{{ t.name }}</strong>
+              <span class="author-location">
+                <i class="pi pi-map-marker"></i> {{ t.location }}
+              </span>
+            </div>
+          </div>
+
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

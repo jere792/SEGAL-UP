@@ -1,33 +1,20 @@
 import { Injectable } from '@angular/core';
+import { APP_CONFIG } from '../../core/data/config.data/config.data';
 import { Product } from '../interfaces/product.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class WhatsappService {
-  // Asegúrate de que el número esté sin el '+' ni espacios para la API de WhatsApp
-  private readonly phoneNumber = '51924911967'; 
 
-  enviarConsulta(producto: Product): void {
-    const mensaje = this.generarMensaje(producto);
-    const url = `https://wa.me/${this.phoneNumber}?text=${encodeURIComponent(mensaje)}`;
+  openProduct(product: Product, size: string = ''): void {
+    const message = APP_CONFIG.whatsappMessage(product.nombre, size);
+    const url = `https://wa.me/${APP_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   }
 
-  enviarConsultaGeneral(mensaje: string): void {
-    const url = `https://wa.me/${this.phoneNumber}?text=${encodeURIComponent(mensaje)}`;
+  openGeneral(message?: string): void {
+    const text = message ?? APP_CONFIG.defaultMessage;
+    
+    const url = `https://wa.me/${APP_CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
-  }
-
-  private generarMensaje(producto: Product): string {
-    let mensaje = `¡Hola Vestizo! 🌸\n\nVengo desde su página web y estoy interesada en:\n\n👗 *${producto.nombre}*`;
-    
-    if (producto.precio) {
-      mensaje += `\n💰 Precio: S/ ${producto.precio.toFixed(2)}`;
-    }
-    
-    mensaje += `\n\n¿Me podrían confirmar si tienen disponibilidad de tallas por favor? ✨`;
-    
-    return mensaje;
   }
 }

@@ -10,12 +10,12 @@ import { WhatsappService } from '../../services';
   templateUrl: './product-card.html',
   styleUrls: ['./product-card.scss']
 })
-export class ProductCardComponent  {
+export class ProductCardComponent {
   @Input() product!: Product;
 
   constructor(private whatsappService: WhatsappService) {}
 
   consultarProducto(): void {
-    this.whatsappService.enviarConsulta(this.product);
+    this.whatsappService.openProduct(this.product);
   }
 }

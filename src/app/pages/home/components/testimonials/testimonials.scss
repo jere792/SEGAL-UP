@@ -1,0 +1,149 @@
+@use '../../../../../styles/tokens' as *;
+@use '../../../../../styles/mixins' as *;
+
+.testimonials {
+  background-color: $bg-primary;
+  padding: $spacing-3xl 0;
+
+  @include tablet-down {
+    padding: $spacing-2xl 0;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+
+    .section-label {
+      font-family: $font-primary;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: $primary-gold;
+    }
+
+    .section-title {
+      font-family: $font-secondary;
+      font-size: $font-size-4xl;
+      color: $black;
+      margin: $spacing-xs 0;
+
+      @include tablet-down { font-size: $font-size-3xl; }
+    }
+
+    .section-subtitle {
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      color: $gray-medium;
+      margin: 0;
+    }
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-lg;
+
+    @include tablet-down {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mobile-only {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .testimonial-card {
+    background-color: $white;           // ← cards blancas
+    border-radius: $radius-lg;
+    padding: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    box-shadow: $shadow-sm;             // ← sombra sutil para que resalten sobre el fondo
+    transition: transform $transition-normal, box-shadow $transition-normal;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-lg;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 4px;
+
+      i {
+        color: $primary-gold;           // ← estrellas en gold
+        font-size: 0.875rem;
+      }
+    }
+
+    .testimonial-text {
+      font-family: $font-primary;
+      font-size: $font-size-sm;
+      color: $black;                    // ← texto negro
+      line-height: $line-height-relaxed;
+      margin: 0;
+      flex: 1;
+    }
+
+    .testimonial-product {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: $font-primary;
+      font-size: $font-size-xs;
+      color: $primary-gold;
+      font-weight: $font-weight-medium;
+
+      i { font-size: 0.75rem; }
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding-top: $spacing-sm;
+      border-top: 1px solid $gray-light; // ← separador más sutil
+
+      .author-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: $radius-full;
+        overflow: hidden;
+        flex-shrink: 0;
+        background-color: $primary-beige;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .author-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .author-name {
+          font-family: $font-primary;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-semibold;
+          color: $black;
+        }
+
+        .author-location {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          font-family: $font-primary;
+          font-size: $font-size-xs;
+          color: $gray-medium;
+
+          i { font-size: 0.7rem; }
+        }
+      }
+    }
+  }
+}
