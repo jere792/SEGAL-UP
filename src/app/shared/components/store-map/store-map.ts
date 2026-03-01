@@ -47,7 +47,11 @@ export class StoreMap implements AfterViewInit, OnDestroy {
   }
 
   private async initMap(): Promise<void> {
-    this.L = await import('leaflet');
+    // Leaflet requiere window/document — no funciona en SSR
+    if (typeof window === 'undefined') return;
+
+    const L = await import('leaflet');
+    this.L = L.default ?? L;
 
     delete (this.L.Icon.Default.prototype as any)._getIconUrl;
     this.L.Icon.Default.mergeOptions({
