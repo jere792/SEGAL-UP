@@ -1,4 +1,3 @@
-@use 'tokens' as *;
 @use 'sass:color';
 @use 'tokens' as *;
 
@@ -323,7 +322,7 @@
   background: linear-gradient(
     90deg,
     $gray-light 0%,
-    lighten($gray-light, 5%) 50%,
+    color.adjust($gray-light, $lightness: 5%) 50%,
     $gray-light 100%
   );
   background-size: 200% 100%;

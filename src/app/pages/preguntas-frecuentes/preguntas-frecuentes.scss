@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../../../styles/tokens' as *;
 @use '../../../styles/mixins' as *;
 
@@ -57,7 +58,7 @@
   transition: border-color $transition-fast, box-shadow $transition-fast;
 
   &--open {
-    border-color: darken(#e8ddd0, 10%);
+    border-color: color.adjust(#e8ddd0, $lightness: -10%);
     box-shadow: 0 2px 12px rgba($black, 0.06);
   }
 
@@ -90,7 +91,7 @@
     }
 
     &:hover {
-      background-color: darken(#f5f0ea, 4%);
+      background-color: color.adjust(#f5f0ea, $lightness: -4%);
     }
 
     @include mobile-only {

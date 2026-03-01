@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../../../../../styles/tokens' as *;
 @use '../../../../../styles/mixins' as *;
 
@@ -79,7 +80,7 @@
     i { font-size: 1.25rem; }
 
     &:hover {
-      background-color: darken(#25D366, 8%);
+      background-color: color.adjust(#25D366, $lightness: -8%);
       transform: translateY(-3px);
       box-shadow: 0 8px 24px rgba(#25D366, 0.4);
     }
