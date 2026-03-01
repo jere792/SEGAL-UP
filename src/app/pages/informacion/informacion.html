@@ -1,1 +1,68 @@
-<p>informacion works!</p>
+<div class="informacion">
+
+  <app-page-hero
+    label="Vestizo"
+    title="Información"
+    subtitle="Todo lo que necesitas saber para encontrarnos"
+  />
+
+  <section class="info-section">
+
+    <div class="info-grid">
+
+      <div class="info-cards">
+
+        <div class="info-card">
+          <div class="info-card__icon">
+            <i class="pi pi-map-marker"></i>
+          </div>
+          <div class="info-card__content">
+            <h3>Ubicación</h3>
+            <p>Jr. Sebastián Barranca 1595<br>Tienda 127–128</p>
+            <span class="info-card__sub">Galería La Moda de Gamarra, Lima</span>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card__icon">
+            <i class="pi pi-clock"></i>
+          </div>
+          <div class="info-card__content">
+            <h3>Horario de atención</h3>
+            <div class="hours-row">
+              <span>Lunes – Viernes</span>
+              <span class="hours-time">8:00 am – 6:00 pm</span>
+            </div>
+            <div class="hours-row">
+              <span>Sábado</span>
+              <span class="hours-time">8:00 am – 2:00 pm</span>
+            </div>
+            <div class="hours-row closed">
+              <span>Domingo</span>
+              <span class="hours-time">Cerrado</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card__icon">
+            <i class="pi pi-truck"></i>
+          </div>
+          <div class="info-card__content">
+            <h3>Envíos</h3>
+            <p>Envíos diarios a todo el Perú</p>
+            <span class="info-card__sub">Mayoristas y confeccionistas</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="info-map">
+        <app-store-map />
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

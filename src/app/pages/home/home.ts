@@ -13,7 +13,7 @@ import { Testimonials } from './components/testimonials/testimonials';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, WhatsappButton, Hero, FeaturedCollections, Benefits, InstagramFollow, PromoBanner, Testimonials],
+  imports: [CommonModule, Hero, FeaturedCollections, Benefits, InstagramFollow, PromoBanner, Testimonials],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })

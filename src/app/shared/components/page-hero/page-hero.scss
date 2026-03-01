@@ -1,0 +1,50 @@
+@use '../../../../styles/tokens' as *;
+@use '../../../../styles/mixins' as *;
+
+:host {
+  display: block;
+  background-color: $black;
+}
+
+.page-hero {
+  background-color: $black;
+  padding: calc(#{$spacing-4xl} + 50px) 0 $spacing-2xl;
+  text-align: center;
+
+  &__container {
+    @include container;
+  }
+
+  &__label {
+    display: block;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $primary-gold;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__title {
+    font-family: $font-secondary;
+    font-size: $font-size-5xl;
+    font-weight: $font-weight-bold;
+    color: $white;
+    margin: 0 0 $spacing-xs;
+
+    @include tablet-down {
+      font-size: $font-size-4xl;
+    }
+    @include mobile-only {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  &__subtitle {
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    color: $gray-medium;
+    margin: 0;
+  }
+}

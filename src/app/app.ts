@@ -19,5 +19,5 @@ import { WhatsappButton } from './shared/components/whatsapp-button/whatsapp-but
   styleUrl: './app.scss'
 })
 export class App {
-  title = 'VESTIZ';
+  title = 'VESTIZO';
 }

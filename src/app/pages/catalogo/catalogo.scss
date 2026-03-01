@@ -4,403 +4,457 @@
 .catalogo {
   min-height: 100vh;
   background-color: $bg-primary;
+}
 
-  // ─── HERO ───────────────────────────────────────────
-  .catalogo-hero {
-    background-color: $black;
-    padding: $spacing-2xl 0 $spacing-xl;
-    text-align: center;
+.catalogo-body {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  padding: $spacing-xl $spacing-xl $spacing-3xl;
+  align-items: flex-start;
+  max-width: 100%;
 
-    .hero-label {
-      display: block;
-      font-family: $font-primary;
-      font-size: $font-size-xs;
-      font-weight: $font-weight-semibold;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: $primary-gold;
-      margin-bottom: $spacing-xs;
-    }
-
-    .hero-title {
-      font-family: $font-secondary;
-      font-size: $font-size-5xl;
-      font-weight: $font-weight-bold;
-      color: $white;
-      margin: 0 0 $spacing-xs;
-
-      @include tablet-down { font-size: $font-size-4xl; }
-      @include mobile-only { font-size: $font-size-3xl; }
-    }
-
-    .hero-subtitle {
-      font-family: $font-primary;
-      font-size: $font-size-base;
-      color: $gray-medium;
-      margin: 0;
-    }
+  @include wide-up {
+    padding: $spacing-xl $spacing-2xl $spacing-3xl;
   }
 
-  // ─── FILTROS ────────────────────────────────────────
-  .catalogo-filters {
+  @include tablet-down {
+    flex-direction: column;
+    padding: $spacing-lg $spacing-md $spacing-2xl;
+  }
+}
+
+.catalogo-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 100px;
+
+  @include tablet-down {
+    width: 100%;
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-sm;
+  }
+
+  @include mobile-only {
+    grid-template-columns: 1fr;
+  }
+}
+
+.filter-group {
+  border-bottom: 1px solid $primary-beige;
+  padding: $spacing-sm 0;
+
+  &__header {
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: $spacing-md;
-    padding: $spacing-lg 0;
-    border-bottom: 1px solid $primary-beige;
-
-    @include tablet-down {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .filters-categories {
-      display: flex;
-      gap: $spacing-xs;
-      flex-wrap: wrap;
-
-      .filter-btn {
-        padding: 6px 16px;
-        font-family: $font-primary;
-        font-size: $font-size-xs;
-        font-weight: $font-weight-medium;
-        color: $gray-dark;
-        background: transparent;
-        border: 1px solid $primary-beige;
-        border-radius: $radius-full;
-        cursor: pointer;
-        transition: all $transition-fast;
-        white-space: nowrap;
-
-        &:hover {
-          border-color: $primary-gold;
-          color: $primary-gold;
-        }
-
-        &--active {
-          background-color: $black;
-          border-color: $black;
-          color: $white;
-        }
-      }
-    }
-
-    .filters-search {
-      display: flex;
-      align-items: center;
-      gap: $spacing-xs;
-      padding: 8px 16px;
-      background-color: $white;
-      border: 1px solid $primary-beige;
-      border-radius: $radius-full;
-      min-width: 220px;
-      transition: border-color $transition-fast;
-
-      &:focus-within {
-        border-color: $primary-gold;
-      }
-
-      i {
-        color: $gray-medium;
-        font-size: 0.875rem;
-        flex-shrink: 0;
-      }
-
-      input {
-        border: none;
-        outline: none;
-        background: transparent;
-        font-family: $font-primary;
-        font-size: $font-size-sm;
-        color: $black;
-        width: 100%;
-
-        &::placeholder { color: $gray-medium; }
-      }
-    }
-  }
-
-  // ─── CONTADOR ───────────────────────────────────────
-  .catalogo-count {
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
     font-family: $font-primary;
     font-size: $font-size-xs;
-    color: $gray-medium;
-    padding: $spacing-sm 0;
-    margin: 0;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $black;
+    padding: $spacing-xs 0;
+
+    i { font-size: 0.7rem; color: $gray-medium; }
+
+    &:hover { color: $primary-gold-dark; }
   }
 
-  // ─── GRID ───────────────────────────────────────────
-  .catalogo-grid {
+  &__body {
+    padding: $spacing-xs 0 $spacing-sm;
     display: flex;
     flex-direction: column;
-    gap: $spacing-lg;
-    padding-bottom: $spacing-3xl;
-
-    @include mobile-only {
-      gap: $spacing-md;
-    }
+    gap: $spacing-xs;
   }
+}
 
-  // ─── CARD (layout horizontal 1 por fila) ────────────
-  .product-card {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: $spacing-lg;
+.filter-check {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  cursor: pointer;
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  color: $gray-dark;
+
+  input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: $black;
     cursor: pointer;
-    transition: transform $transition-normal, box-shadow $transition-normal;
-    background-color: $white;
-    border-radius: $radius-md;
-    overflow: hidden;
-    box-shadow: $shadow-sm;
-
-    @include tablet-down {
-      grid-template-columns: 200px 1fr;
-      gap: $spacing-md;
-    }
-
-    @include mobile-only {
-      grid-template-columns: 1fr;
-    }
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: $shadow-md;
-      .card-overlay { opacity: 1; }
-      .card-image img { transform: scale(1.04); }
-      .img-nav { opacity: 1; }
-    }
-
-    .card-image {
-      position: relative;
-      width: 100%;
-      padding-top: 135%;
-      overflow: hidden;
-      background-color: $bg-tertiary;
-
-      @include mobile-only {
-        padding-top: 135%;
-      }
-
-      a {
-        position: absolute;
-        inset: 0;
-      }
-
-      img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.4s $easing-out;
-      }
-
-      .card-badge {
-        position: absolute;
-        top: $spacing-xs;
-        left: $spacing-xs;
-        padding: 3px 8px;
-        font-family: $font-primary;
-        font-size: 0.65rem;
-        font-weight: $font-weight-semibold;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        background-color: $white;
-        color: $black;
-        border-radius: $radius-xs;
-        z-index: 2;
-      }
-
-      // ─── FLECHAS ──────────────────────────────────
-      .img-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(4px);
-        border: none;
-        border-radius: $radius-full;
-        cursor: pointer;
-        z-index: 3;
-        opacity: 0;
-        transition: opacity $transition-fast, transform $transition-fast;
-
-        i { font-size: 0.75rem; color: $black; }
-
-        &--prev { left: $spacing-xs; }
-        &--next { right: $spacing-xs; }
-
-        &:hover {
-          background-color: $white;
-          transform: translateY(-50%) scale(1.1);
-        }
-      }
-
-      // ─── DOTS ─────────────────────────────────────
-      .img-dots {
-        position: absolute;
-        bottom: $spacing-xs;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 5px;
-        z-index: 3;
-
-        .img-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: $radius-full;
-          border: none;
-          background-color: rgba(255, 255, 255, 0.5);
-          cursor: pointer;
-          padding: 0;
-          transition: all $transition-fast;
-
-          &--active {
-            background-color: $white;
-            width: 18px;
-          }
-        }
-      }
-
-      // ─── OVERLAY WA ───────────────────────────────
-      .card-overlay {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        padding-bottom: $spacing-md;
-        background-color: rgba(26, 26, 26, 0.25);
-        opacity: 0;
-        transition: opacity $transition-normal;
-        z-index: 2;
-
-        .btn-whatsapp {
-          display: flex;
-          align-items: center;
-          gap: $spacing-xs;
-          padding: 0.6rem 1.25rem;
-          background-color: $white;
-          color: $black;
-          border: none;
-          border-radius: $radius-full;
-          font-family: $font-primary;
-          font-size: $font-size-sm;
-          font-weight: $font-weight-medium;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          cursor: pointer;
-          transition: all $transition-fast;
-
-          svg {
-            width: 18px;
-            height: 18px;
-            color: #25D366;
-          }
-
-          &:hover {
-            background-color: $black;
-            color: $white;
-          }
-        }
-      }
-    }
-
-    // ─── INFO (ahora a la derecha) ────────────────
-    .card-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: $spacing-sm;
-      padding: $spacing-lg;
-
-      @include mobile-only {
-        padding: $spacing-md;
-      }
-
-      .card-header {
-        display: flex;
-        flex-direction: column;
-        gap: $spacing-xs;
-      }
-
-      .card-name {
-        font-family: $font-secondary;
-        font-size: $font-size-2xl;
-        font-weight: $font-weight-semibold;
-        color: $black;
-        margin: 0;
-        transition: color $transition-fast;
-
-        @include tablet-down { font-size: $font-size-xl; }
-      }
-
-      .card-price {
-        font-family: $font-primary;
-        font-size: $font-size-xl;
-        font-weight: $font-weight-bold;
-        color: $primary-gold-dark;
-        margin: 0;
-
-        @include tablet-down { font-size: $font-size-lg; }
-      }
-
-      .card-category {
-        font-family: $font-primary;
-        font-size: $font-size-sm;
-        color: $gray-medium;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        margin-top: $spacing-xs;
-      }
-    }
-
-    &:hover .card-name {
-      color: $primary-gold-dark;
-    }
   }
 
-  // ─── EMPTY STATE ────────────────────────────────────
-  .catalogo-empty {
-    text-align: center;
-    padding: $spacing-3xl 0;
-    display: flex;
+  &:hover span { color: $black; }
+}
+
+.filter-range {
+  display: flex;
+  justify-content: space-between;
+  font-family: $font-primary;
+  font-size: $font-size-xs;
+  color: $gray-medium;
+  margin-bottom: $spacing-xs;
+}
+
+.filter-slider {
+  width: 100%;
+  accent-color: $black;
+  cursor: pointer;
+}
+
+.catalogo-main {
+  flex: 1;
+  min-width: 0;
+  padding-left: $spacing-xl;
+
+  @include tablet-down {
+    padding-left: 0;
+    padding-top: $spacing-lg;
+  }
+}
+
+.catalogo-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: $spacing-md;
+  border-bottom: 1px solid $primary-beige;
+  margin-bottom: $spacing-lg;
+
+  @include mobile-only {
     flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+}
+
+.catalogo-count {
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  color: $gray-medium;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+
+  @include mobile-only {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.view-toggle {
+  display: flex;
+  gap: 4px;
+
+  button {
+    width: 32px;
+    height: 32px;
+    display: flex;
     align-items: center;
-    gap: $spacing-md;
+    justify-content: center;
+    background: none;
+    border: 1px solid $primary-beige;
+    border-radius: $radius-sm;
+    color: $gray-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
 
-    i {
-      font-size: 3rem;
-      color: $gray-medium;
+    i { font-size: 0.85rem; }
+
+    &:hover, &.active {
+      border-color: $black;
+      color: $black;
+    }
+  }
+}
+
+.sort-select {
+  position: relative;
+
+  select {
+    appearance: none;
+    background: none;
+    border: 1px solid $primary-beige;
+    border-radius: $radius-sm;
+    padding: 6px 32px 6px 12px;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: $black;
+    cursor: pointer;
+    transition: border-color $transition-fast;
+
+    &:hover, &:focus { border-color: $black; outline: none; }
+  }
+
+  i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.65rem;
+    color: $gray-medium;
+    pointer-events: none;
+  }
+}
+
+.catalogo-grid {
+  display: grid;
+  gap: $spacing-md;
+  padding-bottom: $spacing-xl;
+
+  &.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+    @include tablet-down { grid-template-columns: repeat(3, 1fr); }
+    @include mobile-only { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  &.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    @include tablet-down { grid-template-columns: repeat(2, 1fr); }
+    @include mobile-only { grid-template-columns: 1fr; }
+  }
+
+  &.grid-list {
+    grid-template-columns: 1fr;
+
+    .product-card {
+      flex-direction: row;
+      border-bottom: 1px solid $primary-beige;
+      padding-bottom: $spacing-md;
+
+      .card-image {
+        width: 180px;
+        flex-shrink: 0;
+        padding-top: 0;
+        height: 220px;
+
+        @include mobile-only {
+          width: 110px;
+          height: 140px;
+        }
+      }
+      .card-info {
+        padding: $spacing-md $spacing-lg;
+        justify-content: center;
+
+        .card-name { font-size: $font-size-xl; }
+        .card-price { font-size: $font-size-base; }
+        .card-category { margin-top: $spacing-xs; }
+      }
+    }
+  }
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  &:hover {
+    .card-overlay { opacity: 1; }
+    .card-image img { transform: scale(1.04); }
+  }
+
+  .card-image {
+    position: relative;
+    width: 100%;
+    padding-top: 150%;
+    overflow: hidden;
+    background-color: $bg-tertiary;
+    border-radius: $radius-md;
+
+    @include tablet-down { padding-top: 135%; }
+    @include mobile-only  { padding-top: 130%; }
+
+    img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.4s $easing-out;
     }
 
-    p {
+    .card-badge {
+      position: absolute;
+      top: $spacing-xs;
+      left: $spacing-xs;
+      padding: 3px 8px;
       font-family: $font-primary;
-      font-size: $font-size-base;
-      color: $gray-medium;
-      margin: 0;
-    }
-
-    button {
-      padding: $spacing-xs $spacing-lg;
-      background-color: $black;
-      color: $white;
-      font-family: $font-primary;
-      font-size: $font-size-sm;
+      font-size: 0.65rem;
       font-weight: $font-weight-semibold;
+      text-transform: uppercase;
+      background-color: $white;
+      color: $black;
+      border-radius: $radius-xs;
+      z-index: 4;
+    }
+
+    .img-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba($white, 0.88);
+      backdrop-filter: blur(4px);
       border: none;
       border-radius: $radius-full;
       cursor: pointer;
-      transition: opacity $transition-fast;
+      z-index: 4;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+      transition: background-color $transition-fast, transform $transition-fast;
 
-      &:hover { opacity: 0.8; }
+      i { font-size: 0.7rem; color: $black; transition: color $transition-fast; }
+
+      &--prev { left: $spacing-xs; }
+      &--next { right: $spacing-xs; }
+
+      &:hover {
+        background-color: $primary-gold;
+        transform: translateY(-50%) scale(1.1);
+        i { color: $white; }
+      }
     }
+
+    .img-dots {
+      position: absolute;
+      bottom: $spacing-xs;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 4px;
+      z-index: 4;
+
+      .img-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: $radius-full;
+        border: none;
+        background-color: rgba($white, 0.5);
+        cursor: pointer;
+        padding: 0;
+        transition: all $transition-fast;
+
+        &--active { background-color: $white; width: 14px; }
+      }
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: $spacing-md;
+      background-color: rgba(26, 26, 26, 0.2);
+      opacity: 0;
+      transition: opacity $transition-normal;
+      z-index: 2;
+
+      .btn-whatsapp {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: 0.5rem 1rem;
+        background-color: $white;
+        color: $black;
+        border: none;
+        border-radius: $radius-full;
+        font-family: $font-primary;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        svg { width: 16px; height: 16px; color: #25D366; }
+
+        &:hover { background-color: $black; color: $white; }
+      }
+    }
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: $spacing-sm 0 0;
+
+    .card-name {
+      font-family: $font-secondary;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-regular;
+      color: $black;
+      margin: 0;
+      transition: color $transition-fast;
+
+      @include tablet-down { font-size: $font-size-base; }
+      @include mobile-only  { font-size: $font-size-sm; }
+    }
+
+    .card-price {
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $primary-gold-dark;
+      margin: 0;
+
+      @include tablet-down { font-size: $font-size-sm; }
+    }
+
+    .card-category {
+      font-family: $font-primary;
+      font-size: $font-size-xs;
+      color: $gray-medium;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  &:hover .card-name { color: $primary-gold-dark; }
+}
+
+.catalogo-empty {
+  text-align: center;
+  padding: $spacing-3xl 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+
+  i { font-size: 3rem; color: $gray-medium; }
+
+  p { font-family: $font-primary; font-size: $font-size-base; color: $gray-medium; margin: 0; }
+
+  button {
+    padding: $spacing-xs $spacing-lg;
+    background-color: $black;
+    color: $white;
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    border: none;
+    border-radius: $radius-full;
+    cursor: pointer;
+    transition: opacity $transition-fast;
+
+    &:hover { opacity: 0.8; }
   }
 }

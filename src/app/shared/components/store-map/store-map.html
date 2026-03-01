@@ -1,0 +1,39 @@
+<div class="store-map">
+  <div class="map-container" #mapContainer></div>
+
+  <div class="map-controls">
+    @if (!routeLoading && !routeDrawn) {
+      <button class="btn-route" (click)="trazarRuta()">
+        <i class="pi pi-send"></i>
+        Cómo llegar desde mi ubicación
+      </button>
+    }
+
+    @if (routeLoading) {
+      <button class="btn-route btn-route--loading" disabled>
+        <i class="pi pi-spinner pi-spin"></i>
+        Calculando ruta...
+      </button>
+    }
+
+    @if (routeDrawn && !routeLoading) {
+      <div class="route-info">
+        <div class="route-stat">
+          <i class="pi pi-map"></i>
+          <span>{{ routeDistance }}</span>
+        </div>
+        
+        <button class="btn-clear" (click)="limpiarRuta()">
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+    }
+
+    @if (errorMsg) {
+      <div class="route-error">
+        <i class="pi pi-exclamation-triangle"></i>
+        {{ errorMsg }}
+      </div>
+    }
+  </div>
+</div>

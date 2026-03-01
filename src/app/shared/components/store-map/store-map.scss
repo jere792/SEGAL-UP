@@ -1,0 +1,155 @@
+@use '../../../../styles/tokens' as *;
+@use '../../../../styles/mixins' as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.store-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  border-radius: $radius-lg;
+  border: 1px solid $primary-beige;
+  box-shadow: 0 4px 24px rgba($black, 0.07);
+
+  @include mobile-only { min-height: 320px; }
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  z-index: 1;
+
+  :global(.leaflet-container) {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: $radius-lg;
+  }
+
+  :global(.leaflet-popup-content-wrapper) {
+    border-radius: $radius-md;
+    box-shadow: 0 4px 16px rgba($black, 0.12);
+  }
+
+  :global(.leaflet-popup-tip) {
+    background: $white;
+  }
+
+  :global(.leaflet-popup-content) {
+    margin: 8px 12px;
+  }
+}
+
+.map-controls {
+  position: absolute;
+  bottom: $spacing-md;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  white-space: nowrap;
+  pointer-events: all;
+}
+
+.btn-route {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: 12px $spacing-lg;
+  background-color: $black;
+  color: $white;
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  border-radius: $radius-full;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba($black, 0.3);
+  transition: background-color $transition-fast, transform $transition-fast;
+
+  i { font-size: 1rem; }
+
+  &:hover:not(:disabled) {
+    background-color: $primary-gold-dark;
+    transform: translateY(-2px);
+  }
+
+  &--loading {
+    background-color: $gray-medium;
+    cursor: default;
+    i { animation: spin 1s linear infinite; }
+  }
+
+  @include mobile-only {
+    padding: 9px $spacing-md;
+    font-size: $font-size-xs;
+    letter-spacing: 0.05em;
+    i { font-size: 0.8rem; }
+  }
+}
+
+.route-info {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: 10px $spacing-md;
+  background-color: $white;
+  border-radius: $radius-full;
+  box-shadow: 0 4px 16px rgba($black, 0.15);
+}
+
+.route-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $black;
+
+  i { font-size: 0.9rem; color: $primary-gold-dark; }
+}
+
+.btn-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: $bg-primary;
+  border: none;
+  border-radius: $radius-full;
+  cursor: pointer;
+  margin-left: 4px;
+  transition: background-color $transition-fast;
+
+  i { font-size: 0.75rem; color: $gray-medium; }
+
+  &:hover { background-color: $primary-beige; i { color: $black; } }
+}
+
+.route-error {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 10px $spacing-md;
+  background-color: $white;
+  border-radius: $radius-full;
+  box-shadow: 0 4px 16px rgba($black, 0.15);
+  font-family: $font-primary;
+  font-size: $font-size-xs;
+  color: #c0392b;
+
+  i { font-size: 0.9rem; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
