@@ -1,0 +1,112 @@
+<div class="blog">
+
+  <app-page-hero
+    label="Vestizo"
+    title="Blog"
+    subtitle="Historia y colecciones de nuestra marca"
+  />
+
+  <section class="blog-section">
+    <div class="blog-container">
+
+      <div class="blog-toolbar">
+        <span class="blog-count">{{ posts.length }} colecciones</span>
+        <div class="view-toggle">
+          <button
+            [class.active]="viewMode === 'feed'"
+            (click)="viewMode = 'feed'"
+            aria-label="Vista timeline"
+            title="Vista timeline"
+          >
+            <i class="pi pi-bars"></i>
+          </button>
+          <button
+            [class.active]="viewMode === 'grid'"
+            (click)="viewMode = 'grid'"
+            aria-label="Vista grid"
+            title="Vista grid"
+          >
+            <i class="pi pi-th-large"></i>
+          </button>
+        </div>
+      </div>
+
+      @for (anio of getAniosUnicos(); track anio) {
+        <div class="blog-year-group">
+
+          <div class="blog-year-header">
+            <span class="blog-year-line"></span>
+            <span class="blog-year-label">{{ anio }}</span>
+            <span class="blog-year-line"></span>
+          </div>
+
+          @if (viewMode === 'grid') {
+            <div class="blog-grid">
+              @for (post of getPostsPorAnio(anio); track post.id) {
+                <article class="blog-card">
+                  <a [routerLink]="['/blog', post.slug]" class="blog-card__image-link">
+                    <div class="blog-card__image">
+                      <img [src]="post.imagen" [alt]="post.titulo" loading="lazy" />
+                      <div class="blog-card__overlay">
+                        <span>Ver colección</span>
+                        <i class="pi pi-arrow-right"></i>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="blog-card__content">
+                    <div class="blog-card__meta">
+                      <span class="blog-card__temporada">{{ post.temporada }} {{ post.anio }}</span>
+                    </div>
+                    <h2 class="blog-card__titulo">
+                      <a [routerLink]="['/blog', post.slug]">{{ post.titulo }}</a>
+                    </h2>
+                    <p class="blog-card__descripcion">{{ post.descripcion }}</p>
+                    <a [routerLink]="['/blog', post.slug]" class="blog-card__btn">
+                      Leer más
+                      <i class="pi pi-arrow-right"></i>
+                    </a>
+                  </div>
+                </article>
+              }
+            </div>
+          }
+
+          @if (viewMode === 'feed') {
+            <div class="blog-feed">
+              @for (post of getPostsPorAnio(anio); track post.id) {
+                <article class="feed-entry">
+
+                  <div class="feed-entry__aside">
+                    <span class="feed-entry__temporada">{{ post.temporada }}</span>
+                    <div class="feed-entry__dot"></div>
+                    <div class="feed-entry__line"></div>
+                  </div>
+
+                  <div class="feed-entry__body">
+                    <div class="feed-entry__image">
+                      <img [src]="post.imagen" [alt]="post.titulo" loading="lazy" />
+                    </div>
+                    <div class="feed-entry__content">
+                      <span class="feed-entry__coleccion">{{ post.coleccion }}</span>
+                      <h2 class="feed-entry__titulo">{{ post.titulo }}</h2>
+                      <p class="feed-entry__descripcion">{{ post.descripcion }}</p>
+                      <p class="feed-entry__texto">{{ post.contenido }}</p>
+                      <a [routerLink]="['/blog', post.slug]" class="feed-entry__btn">
+                        Ver prendas de esta colección
+                        <i class="pi pi-arrow-right"></i>
+                      </a>
+                    </div>
+                  </div>
+
+                </article>
+              }
+            </div>
+          }
+
+        </div>
+      }
+
+    </div>
+  </section>
+
+</div>

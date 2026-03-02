@@ -1,0 +1,406 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.blog {
+  min-height: 100vh;
+  background-color: $bg-primary;
+}
+
+.blog-section {
+  padding: $spacing-2xl 0 $spacing-3xl;
+}
+
+.blog-container {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2xl;
+}
+
+// ─── TOOLBAR ─────────────────────────────────────────────
+.blog-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: $spacing-md;
+  border-bottom: 1px solid $primary-beige;
+}
+
+.blog-count {
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  color: $gray-medium;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 4px;
+
+  button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid $primary-beige;
+    border-radius: $radius-sm;
+    color: $gray-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    i { font-size: 0.85rem; }
+
+    &:hover, &.active {
+      border-color: $black;
+      color: $black;
+    }
+  }
+}
+
+// ─── AÑO ─────────────────────────────────────────────────
+.blog-year-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.blog-year-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.blog-year-line {
+  flex: 1;
+  height: 1px;
+  background-color: $primary-beige;
+}
+
+.blog-year-label {
+  font-family: $font-secondary;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-regular;
+  color: $primary-gold-dark;
+  white-space: nowrap;
+}
+
+// ─── VISTA GRID ──────────────────────────────────────────
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+
+  @include tablet-down {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile-only {
+    grid-template-columns: 1fr;
+  }
+}
+
+.blog-card {
+  background-color: $white;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  border: 1px solid $primary-beige;
+  transition: box-shadow $transition-normal, transform $transition-normal;
+
+  &:hover {
+    box-shadow: 0 8px 32px rgba($black, 0.1);
+    transform: translateY(-4px);
+  }
+
+  &__image-link {
+    display: block;
+  }
+
+  &__image {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform $transition-slow;
+    }
+  }
+
+  &:hover &__image img {
+    transform: scale(1.05);
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba($black, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    opacity: 0;
+    transition: opacity $transition-normal;
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $white;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+
+    i { font-size: 0.85rem; }
+  }
+
+  &:hover &__overlay {
+    opacity: 1;
+  }
+
+  &__content {
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__temporada {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $primary-gold-dark;
+  }
+
+  &__titulo {
+    font-family: $font-secondary;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-regular;
+    color: $black;
+    margin: 0;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color $transition-fast;
+      &:hover { color: $primary-gold-dark; }
+    }
+  }
+
+  &__descripcion {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    color: $gray-medium;
+    line-height: $line-height-relaxed;
+    margin: 0;
+    @include text-clamp(3);
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $black;
+    text-decoration: none;
+    margin-top: $spacing-xs;
+    transition: gap $transition-fast, color $transition-fast;
+
+    i { font-size: 0.7rem; }
+
+    &:hover {
+      color: $primary-gold-dark;
+      gap: 10px;
+    }
+  }
+}
+
+// ─── VISTA FEED ──────────────────────────────────────────
+.blog-feed {
+  display: flex;
+  flex-direction: column;
+  max-width: 860px;
+}
+
+.feed-entry {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 $spacing-lg;
+
+  @include mobile-only {
+    grid-template-columns: 40px 1fr;
+    gap: 0 $spacing-sm;
+  }
+
+  &__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6px;
+  }
+
+  &__temporada {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $primary-gold-dark;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    margin-bottom: $spacing-sm;
+    white-space: nowrap;
+
+    @include mobile-only {
+      display: none;
+    }
+  }
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: $radius-full;
+    background-color: $primary-gold;
+    border: 3px solid $bg-primary;
+    box-shadow: 0 0 0 2px $primary-gold;
+    flex-shrink: 0;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__line {
+    flex: 1;
+    width: 1px;
+    background-color: $primary-beige;
+    min-height: 40px;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    padding-bottom: $spacing-2xl;
+    border-bottom: 1px solid $primary-beige;
+    margin-bottom: $spacing-2xl;
+
+    @include tablet-up {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: $spacing-xl;
+      align-items: start;
+    }
+  }
+
+  &:last-child &__body {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  &__image {
+    border-radius: $radius-lg;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background-color: $bg-tertiary;
+    flex-shrink: 0;
+
+    @include mobile-only {
+      aspect-ratio: 4/3;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform $transition-slow;
+    }
+
+    &:hover img {
+      transform: scale(1.03);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding-top: $spacing-xs;
+  }
+
+  &__coleccion {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: $primary-gold-dark;
+  }
+
+  &__titulo {
+    font-family: $font-secondary;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-regular;
+    color: $black;
+    margin: 0;
+    line-height: $line-height-tight;
+
+    @include mobile-only {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__descripcion {
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    color: $gray-dark;
+    font-weight: $font-weight-medium;
+    line-height: $line-height-relaxed;
+    margin: 0;
+  }
+
+  &__texto {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    color: $gray-medium;
+    line-height: $line-height-relaxed;
+    margin: 0;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-md;
+    background-color: $black;
+    color: $white;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border-radius: $radius-full;
+    margin-top: $spacing-xs;
+    align-self: flex-start;
+    transition: all $transition-fast;
+
+    i { font-size: 0.75rem; }
+
+    &:hover {
+      background-color: $primary-gold-dark;
+      color: $white;
+      gap: $spacing-sm;
+    }
+  }
+}

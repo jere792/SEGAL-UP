@@ -73,6 +73,12 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-xs;
+
+    &--colors {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
   }
 }
 
@@ -108,6 +114,30 @@
   width: 100%;
   accent-color: $black;
   cursor: pointer;
+}
+
+.color-chip {
+  padding: 4px 10px;
+  font-family: $font-primary;
+  font-size: $font-size-xs;
+  text-transform: capitalize;
+  background-color: $white;
+  border: 1px solid $primary-beige;
+  border-radius: $radius-full;
+  cursor: pointer;
+  transition: all $transition-fast;
+  color: $gray-dark;
+
+  &:hover {
+    border-color: $black;
+    color: $black;
+  }
+
+  &--active {
+    background-color: $black;
+    border-color: $black;
+    color: $white;
+  }
 }
 
 .catalogo-main {

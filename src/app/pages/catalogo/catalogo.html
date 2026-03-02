@@ -6,7 +6,6 @@
     subtitle="Encuentra la prenda perfecta para ti"
   />
 
-
   <div class="catalogo-body">
 
     <aside class="catalogo-sidebar">
@@ -56,6 +55,28 @@
                   (change)="toggleCategoria(cat)" />
                 <span>{{ cat }}</span>
               </label>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="filter-group">
+        <button class="filter-group__header" (click)="toggleFilter('tonalidad')">
+          <span>Color</span>
+          <i class="pi" [class.pi-chevron-up]="openFilters['tonalidad']" [class.pi-chevron-down]="!openFilters['tonalidad']"></i>
+        </button>
+        @if (openFilters['tonalidad']) {
+          <div class="filter-group__body filter-group__body--colors">
+            @for (ton of tonalidadesUnicas; track ton) {
+              <button
+                class="color-chip"
+                [class.color-chip--active]="filtros.tonalidades.includes(ton)"
+                [attr.data-color]="ton"
+                (click)="toggleTonalidad(ton)"
+                [title]="ton"
+              >
+                {{ ton }}
+              </button>
             }
           </div>
         }

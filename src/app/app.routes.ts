@@ -15,17 +15,12 @@ export const routes: Routes = [
   },
   {
     path: 'preguntas-frecuentes',
-    loadComponent: () =>
-      import('./pages/preguntas-frecuentes/preguntas-frecuentes').then(
-        (m) => m.PreguntasFrecuentes,
-      ),
+    loadComponent: () => import('./pages/preguntas-frecuentes/preguntas-frecuentes').then((m) => m.PreguntasFrecuentes),
   },
-
   {
     path: 'sobre-nosotros',
     loadComponent: () => import('./pages/sobre-nosotros/sobre-nosotros').then((m) => m.SobreNosotros),
   },
-
   {
     path: 'privacidad',
     loadComponent: () => import('./pages/privacidad/privacidad').then((m) => m.Privacidad),
@@ -34,9 +29,16 @@ export const routes: Routes = [
     path: 'terminos',
     loadComponent: () => import('./pages/terminos/terminos').then((m) => m.Terminos),
   },
-
+  {
+    path: 'blog',
+    loadComponent: () => import('./pages/blog/blog').then((m) => m.Blog),
+  },
+  {
+    path: 'blog/:slug',
+    loadComponent: () => import('./pages/blog/blog-detail/blog-detail').then((m) => m.BlogDetail),
+  },
   {
     path: '**',
-    redirectTo: '',
+    loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFound),
   },
 ];

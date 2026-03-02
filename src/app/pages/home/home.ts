@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
-import { WhatsappButton } from '../../shared/components/whatsapp-button/whatsapp-button';
+
+import { CommonModule } from '@angular/common';
 
 import { Hero } from './components/hero/hero';
 import { FeaturedCollections } from './components/featured-collections/featured-collections';
@@ -17,6 +18,10 @@ import { Testimonials } from './components/testimonials/testimonials';
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
-export class Home {
+export class Home implements OnInit {
+  constructor(private title: Title) {}
 
+  ngOnInit(): void {
+    this.title.setTitle('Vestizo - Moda Exclusiva');
+  }
 }
