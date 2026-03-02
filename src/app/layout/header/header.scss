@@ -68,7 +68,6 @@
 
   .header-logo {
     z-index: $z-index-header + 1;
-    margin-left: -$spacing-2xl;
 
     @include tablet-down {
       margin-left: 0;
