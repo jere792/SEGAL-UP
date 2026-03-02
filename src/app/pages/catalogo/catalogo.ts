@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { products } from '../../core/data/products.data/products.data';
 import { Product } from '../../shared/interfaces/product.interface';
@@ -47,7 +47,10 @@ export class Catalogo implements OnInit {
 
   private activeImageIndex: Record<string, number> = {};
 
-  constructor(private whatsapp: WhatsappService) {}
+  constructor(
+    private whatsapp: WhatsappService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {}
 
   ngOnInit(): void {
     const precios = this.allProducts.map(p => p.precio ?? 0);
@@ -57,6 +60,20 @@ export class Catalogo implements OnInit {
     this.filtros.precioMax = this.precioMaxGlobal;
     this.categoriasUnicas = [...new Set(this.allProducts.map(p => p.categoria))];
     this.aplicarFiltros();
+
+    // Precargar todas las imágenes de todos los productos
+    if (isPlatformBrowser(this.platformId)) {
+      this.precargarImagenes();
+    }
+  }
+
+  private precargarImagenes(): void {
+    this.allProducts.forEach(product => {
+      product.imagenes.forEach(url => {
+        const img = new Image();
+        img.src = url;
+      });
+    });
   }
 
   toggleFilter(key: string): void {

@@ -1,23 +1,20 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
 import { Header } from './layout/header/header';
 import { Footer } from './layout/footer/footer';
-
 import { WhatsappButton } from './shared/components/whatsapp-button/whatsapp-button';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    Header,
-    Footer,
-    WhatsappButton
-  ],
+  imports: [RouterOutlet, Header, Footer, WhatsappButton],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
   title = 'VESTIZO';
+
+  getRouteAnimationData(outlet: RouterOutlet) {
+    return outlet?.activatedRouteData?.['animation'] ?? outlet?.activatedRoute?.snapshot?.url?.[0]?.path ?? '';
+  }
 }

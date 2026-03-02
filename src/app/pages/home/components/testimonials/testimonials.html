@@ -8,37 +8,91 @@
     </div>
 
     <div class="testimonials-grid">
-      @for (t of testimonials; track t.name) {
-        <div class="testimonial-card fade-in-up">
 
-          <div class="testimonial-stars">
-            @for (star of getStars(t.rating); track $index) {
-              <i class="pi pi-star-fill"></i>
-            }
-          </div>
-
-          <p class="testimonial-text">"{{ t.text }}"</p>
-
-          @if (t.product) {
-            <span class="testimonial-product">
-              <i class="pi pi-tag"></i> {{ t.product }}
-            </span>
-          }
-
-          <div class="testimonial-author">
-            <div class="author-avatar">
-              <img [src]="t.avatar" [alt]="t.name" />
-            </div>
-            <div class="author-info">
-              <strong class="author-name">{{ t.name }}</strong>
-              <span class="author-location">
-                <i class="pi pi-map-marker"></i> {{ t.location }}
-              </span>
-            </div>
-          </div>
-
+      <div class="testimonial-card fade-in-up">
+        <div class="testimonial-stars">
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
         </div>
-      }
+        <p class="testimonial-text">"La calidad de las prendas es increíble. Me asesoraron por WhatsApp y llegó perfecto a mi casa."</p>
+        <span class="testimonial-product">
+          <i class="pi pi-tag"></i> Vestido Madrid
+        </span>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <img
+              src="https://res.cloudinary.com/dpnxbnqxu/image/upload/q_auto,f_auto,w_80,h_80,c_fill,g_face/v1772414931/48d6465f-b96b-4a09-9920-bc63cd14ff7c_ux2i1z.jpg"
+              alt="Sandy Solis"
+            />
+          </div>
+          <div class="author-info">
+            <strong class="author-name">Sandy Solis</strong>
+            <span class="author-location">
+              <i class="pi pi-map-marker"></i> Lima
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-in-up">
+        <div class="testimonial-stars">
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+        </div>
+        <p class="testimonial-text">"Súper fácil comprar, en minutos me respondieron y el envío fue rapidísimo. 100% recomendado."</p>
+        <span class="testimonial-product">
+          <i class="pi pi-tag"></i> Conjunto Viena
+        </span>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <img
+              src="https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772415175/264c62bc-2d2c-4e39-80be-fded207eb44a_ef4qca.jpg"
+              alt="Daniela R."
+            />
+          </div>
+          <div class="author-info">
+            <strong class="author-name">Daniela Romes</strong>
+            <span class="author-location">
+              <i class="pi pi-map-marker"></i> Lima
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-in-up">
+        <div class="testimonial-stars">
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+        </div>
+        <p class="testimonial-text">"Hermosas telas y diseños únicos. La atención personalizada hace toda la diferencia."</p>
+        <span class="testimonial-product">
+          <i class="pi pi-tag"></i> Blusa Raisa
+        </span>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <img
+              src="https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772418212/descarga_s34ox1.jpg"
+              alt="Camila Torres"
+            />
+          </div>
+          <div class="author-info">
+            <strong class="author-name">Camila T.</strong>
+            <span class="author-location">
+              <i class="pi pi-map-marker"></i> Trujillo
+            </span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>

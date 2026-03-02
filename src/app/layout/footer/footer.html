@@ -6,7 +6,7 @@
         <div class="footer-column footer-column--logo">
           <a routerLink="/" class="footer-logo-link">
             <img
-              src="assets/layout/header/LOGO-TRANSPARENTE.png"
+              src="https://res.cloudinary.com/dpnxbnqxu/image/upload/e_trim,w_600/v1772405762/LOGO-TRANSPARENTE_d0oxh8.png"
               alt="Vestizo Logo"
               class="footer-logo"
             />
@@ -17,13 +17,10 @@
         <div class="footer-column">
           <h3 class="footer-title">Sobre Nosotros</h3>
           <ul class="footer-links">
-            @for (link of aboutLinks; track link.route) {
-              <li>
-                <a [routerLink]="link.route" class="footer-link">
-                  {{ link.label }}
-                </a>
-              </li>
-            }
+            <li><a routerLink="/" class="footer-link">Inicio</a></li>
+            <li><a routerLink="/sobre-nosotros" class="footer-link">Sobre Nosotros</a></li>
+            <li><a routerLink="/informacion" class="footer-link">Nuestras Tiendas</a></li>
+            <li><a routerLink="/blog" class="footer-link">Blog</a></li>
           </ul>
         </div>
 
@@ -31,13 +28,11 @@
         <div class="footer-column">
           <h3 class="footer-title">Soporte</h3>
           <ul class="footer-links">
-            @for (link of supportLinks; track link.route) {
-              <li>
-                <a [routerLink]="link.route" class="footer-link">
-                  {{ link.label }}
-                </a>
-              </li>
-            }
+            <li>
+              <a routerLink="/preguntas-frecuentes" class="footer-link">Preguntas Frecuentes</a>
+            </li>
+            <li><a routerLink="/preguntas-frecuentes" class="footer-link">Política de Envío</a></li>
+            <li><a routerLink="/preguntas-frecuentes" class="footer-link">Política de Reembolso</a></li>
           </ul>
         </div>
 
@@ -45,13 +40,8 @@
         <div class="footer-column">
           <h3 class="footer-title">Legal</h3>
           <ul class="footer-links">
-            @for (link of legalLinks; track link.route) {
-              <li>
-                <a [routerLink]="link.route" class="footer-link">
-                  {{ link.label }}
-                </a>
-              </li>
-            }
+            <li><a routerLink="/privacidad" class="footer-link">Política de Privacidad</a></li>
+            <li><a routerLink="/terminos" class="footer-link">Términos y Condiciones</a></li>
           </ul>
         </div>
 
@@ -83,7 +73,6 @@
         <div class="footer-copyright">
           <p>Vestizo © {{ currentYear }}. Todos los derechos reservados</p>
         </div>
-
         <div class="footer-payments">
           <span class="payments-label">Medios de pago:</span>
           <div class="payment-icons">

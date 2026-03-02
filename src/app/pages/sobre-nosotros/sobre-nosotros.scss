@@ -1,0 +1,227 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.sobre-nosotros {
+  min-height: 100vh;
+  background-color: $bg-primary;
+}
+
+.about-section {
+  padding: $spacing-2xl 0 $spacing-3xl;
+}
+
+.about-container {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3xl;
+}
+
+// ─── INTRO ───────────────────────────────────────────────
+.about-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-2xl;
+  align-items: center;
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+  }
+
+  &__text {
+    h2 {
+      font-family: $font-secondary;
+      font-size: $font-size-3xl;
+      font-weight: $font-weight-regular;
+      color: $black;
+      margin: 0 0 $spacing-md;
+
+      @include mobile-only { font-size: $font-size-2xl; }
+    }
+
+    p {
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      color: $gray-dark;
+      line-height: 1.8;
+      margin: 0;
+    }
+  }
+
+  &__image {
+    border-radius: $radius-lg;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    max-height: 480px;
+
+    @include tablet-down {
+      aspect-ratio: 16 / 9;
+      max-height: none;
+    }
+  }
+}
+
+// ─── CARDS ───────────────────────────────────────────────
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+
+  @include tablet-down { grid-template-columns: 1fr; }
+}
+
+.about-card {
+  background-color: $white;
+  border: 1px solid $primary-beige;
+  border-radius: $radius-lg;
+  padding: $spacing-xl $spacing-lg;
+  transition: box-shadow $transition-fast;
+
+  &:hover {
+    box-shadow: 0 4px 20px rgba($black, 0.07);
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    background-color: $bg-primary;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $spacing-md;
+
+    i {
+      font-size: 1.2rem;
+      color: $primary-gold-dark;
+    }
+  }
+
+  h3 {
+    font-family: $font-secondary;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-regular;
+    color: $black;
+    margin: 0 0 $spacing-sm;
+  }
+
+  p {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    color: $gray-dark;
+    line-height: 1.75;
+    margin: 0;
+  }
+}
+
+// ─── STATS ───────────────────────────────────────────────
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-lg;
+  background-color: $black;
+  border-radius: $radius-lg;
+  padding: $spacing-2xl;
+
+  @include tablet-down { grid-template-columns: repeat(2, 1fr); }
+  @include mobile-only {
+    grid-template-columns: repeat(2, 1fr);
+    padding: $spacing-lg;
+  }
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $spacing-xs;
+
+  &__number {
+    font-family: $font-secondary;
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    color: $primary-gold;
+    line-height: 1;
+
+    @include mobile-only { font-size: $font-size-3xl; }
+  }
+
+  &__label {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: $gray-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+}
+
+// ─── STORY ───────────────────────────────────────────────
+.about-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-2xl;
+  align-items: center;
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+  }
+
+  &__text {
+    h2 {
+      font-family: $font-secondary;
+      font-size: $font-size-3xl;
+      font-weight: $font-weight-regular;
+      color: $black;
+      margin: 0 0 $spacing-md;
+
+      @include mobile-only { font-size: $font-size-2xl; }
+    }
+
+    p {
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      color: $gray-dark;
+      line-height: 1.8;
+      margin: 0 0 $spacing-md;
+
+      &:last-child { margin-bottom: 0; }
+    }
+  }
+
+  &__image {
+    border-radius: $radius-lg;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+
+    @include tablet-down { aspect-ratio: 16 / 9; }
+  }
+}
+
+// ─── PLACEHOLDER ─────────────────────────────────────────
+.img-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  background-color: $white;
+  border: 2px dashed $primary-beige;
+  border-radius: $radius-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+
+  i {
+    font-size: 2.5rem;
+    color: $primary-beige;
+  }
+
+  span {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: $gray-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+}

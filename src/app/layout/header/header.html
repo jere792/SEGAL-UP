@@ -2,48 +2,53 @@
   <div class="header-container">
     <div class="header-logo">
       <a routerLink="/" (click)="closeMobileMenu()">
-        <img src="assets/layout/header/LOGO-TRANSPARENTE.png" alt="VESTIZO Moda Exclusiva">
+        <img
+          src="https://res.cloudinary.com/dpnxbnqxu/image/upload/e_trim,w_600/v1772407043/vestizo-transparente-logo_pgxb9q.png"
+          alt="VESTIZO Moda Exclusiva"
+        />
       </a>
     </div>
 
     <nav class="header-nav" [class.mobile-open]="isMobileMenuOpen">
       <ul class="nav-list">
         <li class="nav-item">
-          <a routerLink="/" 
-             routerLinkActive="active" 
-             [routerLinkActiveOptions]="{exact: true}" 
-             (click)="closeMobileMenu()">
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="closeMobileMenu()"
+          >
             Inicio
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/catalogo" 
-             routerLinkActive="active" 
-             (click)="closeMobileMenu()">
+          <a routerLink="/catalogo" routerLinkActive="active" (click)="closeMobileMenu()">
             Catálogo
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/informacion" 
-             routerLinkActive="active" 
-             (click)="closeMobileMenu()">
+          <a routerLink="/informacion" routerLinkActive="active" (click)="closeMobileMenu()">
             Información
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/preguntas-frecuentes" 
-             routerLinkActive="active" 
-             (click)="closeMobileMenu()">
+          <a
+            routerLink="/preguntas-frecuentes"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+          >
             FAQ
           </a>
         </li>
       </ul>
     </nav>
 
-    <button class="mobile-menu-toggle" 
-            [class.open]="isMobileMenuOpen"
-            (click)="toggleMobileMenu()"
-            aria-label="Toggle menu">
+    <button
+      class="mobile-menu-toggle"
+      [class.open]="isMobileMenuOpen"
+      (click)="toggleMobileMenu()"
+      aria-label="Toggle menu"
+    >
       <span></span>
       <span></span>
       <span></span>

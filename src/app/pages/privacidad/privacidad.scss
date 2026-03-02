@@ -1,0 +1,57 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.privacidad,
+.terminos {
+  min-height: 100vh;
+  background-color: $bg-primary;
+}
+
+.legal-section {
+  padding: $spacing-2xl 0 $spacing-3xl;
+}
+
+.legal-container {
+  @include container;
+  max-width: 780px;
+}
+
+.legal-meta {
+  margin-bottom: $spacing-xl;
+  padding-bottom: $spacing-md;
+  border-bottom: 1px solid $primary-beige;
+
+  span {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: $gray-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+}
+
+.legal-content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.legal-block {
+  h2 {
+    font-family: $font-secondary;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-regular;
+    color: $black;
+    margin: 0 0 $spacing-sm;
+    padding-bottom: $spacing-xs;
+    border-bottom: 1px solid $primary-beige;
+  }
+
+  p {
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    color: $gray-dark;
+    line-height: 1.8;
+    margin: 0;
+  }
+}

@@ -68,8 +68,8 @@ export class Footer {
   ];
 
   paymentMethods: PaymentMethod[] = [
-    { name: 'Visa', image: 'assets/layout/footer/VISA.png' },
-    { name: 'Yape', image: 'assets/layout/footer/YAPE.png' },
-    { name: 'Plin', image: 'assets/layout/footer/PLIN.png' }
+    { name: 'Visa', image: 'https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772417399/VISA_r90jgd.png' },
+    { name: 'Yape', image: 'https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772417403/YAPE_cg3bvi.png' },
+    { name: 'Plin', image: 'https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772417408/PLIN_slrldn.png' }
   ];
 }

@@ -17,7 +17,7 @@ export class FeaturedCollections {
   products: Product[] = products
     .filter((p) => p.disponible)
     .sort((a, b) => new Date(b.fechaCreacion).getTime() - new Date(a.fechaCreacion).getTime())
-    .slice(0, 8);
+    .slice(0, 4);
 
   constructor(private whatsapp: WhatsappService) {}
 

@@ -12,6 +12,10 @@
     @include tablet-down {
       padding: $spacing-2xl 0 $spacing-xl;
     }
+
+    @include mobile-only {
+      padding: $spacing-xl 0 $spacing-lg;
+    }
   }
 
   // ─── GRID ───────────────────────────────────────────────
@@ -19,6 +23,7 @@
     display: grid;
     grid-template-columns: 1.5fr repeat(4, 1fr);
     gap: $spacing-2xl;
+    align-items: start;
 
     @include tablet-down {
       grid-template-columns: repeat(2, 1fr);
@@ -26,34 +31,41 @@
     }
 
     @include mobile-only {
-      grid-template-columns: 1fr;
-      gap: $spacing-lg;
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-lg $spacing-xl;
+
+      .footer-column--logo {
+        grid-column: 1 / -1;
+      }
     }
   }
 
+  // ─── LOGO ───────────────────────────────────────────────
   .footer-column--logo {
     display: flex;
     align-items: flex-start;
 
+    @include mobile-only {
+      justify-content: center;
+      width: 100%;
+      margin-bottom: $spacing-md;
+    }
+
     .footer-logo-link {
-      display: inline-block;
+      display: block;
+      width: 220px;
+
+      @include tablet-down {
+        width: 200px;
+      }
 
       .footer-logo {
-        width: 200px;
+        width: 100%;
         height: auto;
         object-fit: contain;
-        padding: 10px 14px;
-        background-color: rgba($gray-medium, 0.925);
-        border: 1px solid rgba($white, 0.35);
-        border-radius: $radius-md;
         opacity: 0.95;
-        transition: all 0.3s ease;
-
-        &:hover {
-          opacity: 1;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
-        }
+        transition: opacity 0.3s ease;
+        display: block;
       }
     }
   }
@@ -86,6 +98,12 @@
 
         &:hover {
           color: $primary-gold;
+        }
+
+        &--disabled {
+          cursor: default;
+          opacity: 0.45;
+          &:hover { color: $gray-light; }
         }
       }
     }
@@ -134,37 +152,6 @@
           background-color: #000000;
         }
       }
-    }
-  }
-
-  // ─── LIBRO DE RECLAMACIONES ─────────────────────────────
-  .claims-button {
-    display: inline-flex;
-    align-items: center;
-    gap: $spacing-xs;
-    padding: $spacing-sm $spacing-md;
-    background-color: $primary-gold;
-    color: $black;
-    font-family: $font-primary;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-semibold;
-    text-decoration: none;
-    border-radius: $radius-md;
-    transition: all 0.3s ease;
-
-    i {
-      font-size: 1rem;
-    }
-
-    &:hover {
-      background-color: $primary-gold-dark;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba($primary-gold, 0.3);
-    }
-
-    @include mobile-only {
-      width: 100%;
-      justify-content: center;
     }
   }
 
