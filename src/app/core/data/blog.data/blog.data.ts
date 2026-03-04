@@ -14,6 +14,19 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'coleccion-sofia-2026',
+    slug: 'coleccion-sofia-2026',
+    titulo: 'Colección Sofía',
+    temporada: 'Verano',
+    anio: 2026,
+    descripcion: 'Elegancia natural en cada detalle. La colección Sofía llega con vestidos en tonos verdes y mostaza para la mujer que irradia confianza.',
+    imagen: 'https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772584704/VESTIDO_2_SOFIA-VERDE_hl08ct.jpg',
+    coleccion: 'Colección Sofía',
+    contenido: 'La colección Sofía nació de la inspiración en la feminidad natural y auténtica. Cada vestido fue pensado para acompañar a la mujer moderna en sus momentos más especiales, combinando cortes favorecedores con paletas de color que evocan la calidez y la serenidad. Disponible en verde y mostaza, dos tonos que definen esta temporada.',
+    productos: ['sofia-verde', 'sofia-marron'],
+    fechaPublicacion: new Date('2026-03-03'),
+  },
+  {
     id: 'coleccion-margarita-2026',
     slug: 'coleccion-margarita-2026',
     titulo: 'Colección Margarita',

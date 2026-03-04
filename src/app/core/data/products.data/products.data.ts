@@ -1,7 +1,6 @@
 import { Product } from '../../../shared/interfaces/product.interface';
 
 export const products: Product[] = [
-
   // ─── COLECCIÓN MARGARITA ────────────────────────────
   {
     id: 'margarita-azul',
@@ -113,4 +112,37 @@ export const products: Product[] = [
     tonalidades: ['negro'],
   },
 
+  {
+    id: 'sofia-verde',
+    nombre: 'Vestido Sofía',
+    descripcion: 'Diseño exclusivo de la colección Sofía.',
+    imagenes: [
+      'https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772584702/VESTIDO_1_SOFIA-VERDE_nrpexi.jpg',
+      'https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772584704/VESTIDO_2_SOFIA-VERDE_hl08ct.jpg',
+      'https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772584706/VESTIDO_3_SOFIA-VERDE_wchxpv.jpg',
+    ],
+    categoria: 'Colección Sofía',
+    precio: 75,
+    fechaCreacion: new Date('2026-02-19'),
+    disponible: true,
+    destacado: true,
+    tonalidades: ['verde'],
+  },
+
+  {
+    id: 'sofia-marron',
+    nombre: 'Vestido Sofía',
+    descripcion: 'Diseño exclusivo de la colección Sofía.',
+    imagenes: [
+      'https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772584702/VESTIDO_1_SOFIA-MARRON_pdy9vy.jpg',
+      'https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772584705/VESTIDO_2_SOFIA-MARRON_mc2ypb.jpg',
+      'https://res.cloudinary.com/dpnxbnqxu/image/upload/v1772584703/VESTIDO_3_SOFIA-MARRON_vb7w6w.jpg',
+    ],
+    categoria: 'Colección Sofía',
+    precio: 75,
+    fechaCreacion: new Date('2026-02-19'),
+    disponible: true,
+    destacado: true,
+    tonalidades: ['mostaza'],
+  },
 ];
