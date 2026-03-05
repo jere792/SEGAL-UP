@@ -30,6 +30,11 @@
   font-family: $font-primary;
   font-size: $font-size-sm;
   color: $gray-medium;
+
+  &__pag {
+    color: $primary-gold-dark;
+    font-weight: $font-weight-semibold;
+  }
 }
 
 .view-toggle {
@@ -178,6 +183,32 @@
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: $primary-gold-dark;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    background-color: $primary-gold;
+    color: $white;
+    font-family: $font-primary;
+    font-size: 0.6rem;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: $radius-full;
+  }
+
+  &__fecha {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: $gray-medium;
+    margin-bottom: 2px;
+
+    i { font-size: 0.65rem; }
   }
 
   &__titulo {
@@ -347,6 +378,38 @@
     color: $primary-gold-dark;
   }
 
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    background-color: $primary-gold;
+    color: $white;
+    font-family: $font-primary;
+    font-size: 0.6rem;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: $radius-full;
+  }
+
+  &__fecha {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: $gray-medium;
+    margin-top: -4px;
+
+    i { font-size: 0.65rem; }
+  }
+
   &__titulo {
     font-family: $font-secondary;
     font-size: $font-size-3xl;
@@ -401,6 +464,80 @@
       background-color: $primary-gold-dark;
       color: $white;
       gap: $spacing-sm;
+    }
+  }
+}
+
+// ─── PAGINACIÓN ──────────────────────────────────────────
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: $spacing-md 0;
+
+  &__btn {
+    min-width: 38px;
+    height: 38px;
+    padding: 0 $spacing-xs;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $gray-dark;
+    background-color: $white;
+    border: 1px solid $primary-beige;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    line-height: 1;
+
+    i { font-size: 0.7rem; }
+
+    &:hover:not(:disabled):not(.pagination__btn--active) {
+      border-color: $black;
+      color: $black;
+    }
+
+    &--active {
+      background-color: $black;
+      border-color: $black;
+      color: $white;
+      cursor: default;
+      font-weight: $font-weight-semibold;
+    }
+
+    &--arrow {
+      color: $gray-medium;
+
+      &:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+    }
+
+    @include mobile-only {
+      min-width: 34px;
+      height: 34px;
+      font-size: $font-size-xs;
+    }
+  }
+
+  &__ellipsis {
+    min-width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    color: $gray-medium;
+    user-select: none;
+
+    @include mobile-only {
+      min-width: 28px;
     }
   }
 }

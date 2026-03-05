@@ -10,7 +10,12 @@
     <div class="blog-container">
 
       <div class="blog-toolbar">
-        <span class="blog-count">{{ posts.length }} colecciones</span>
+        <span class="blog-count">
+          {{ posts.length }} colecciones
+          @if (totalPages > 1) {
+            <span class="blog-count__pag"> · Página {{ currentPage }} de {{ totalPages }}</span>
+          }
+        </span>
         <div class="view-toggle">
           <button
             [class.active]="viewMode === 'feed'"
@@ -56,7 +61,14 @@
                   <div class="blog-card__content">
                     <div class="blog-card__meta">
                       <span class="blog-card__temporada">{{ post.temporada }} {{ post.anio }}</span>
+                      @if (isReciente(post.fechaPublicacion)) {
+                        <span class="blog-card__badge">Nuevo</span>
+                      }
                     </div>
+                    <span class="blog-card__fecha">
+                      <i class="pi pi-calendar"></i>
+                      {{ formatFecha(post.fechaPublicacion) }}
+                    </span>
                     <h2 class="blog-card__titulo">
                       <a [routerLink]="['/blog', post.slug]">{{ post.titulo }}</a>
                     </h2>
@@ -87,8 +99,17 @@
                       <img [src]="post.imagen" [alt]="post.titulo" loading="lazy" />
                     </div>
                     <div class="feed-entry__content">
-                      <span class="feed-entry__coleccion">{{ post.coleccion }}</span>
+                      <div class="feed-entry__meta">
+                        <span class="feed-entry__coleccion">{{ post.coleccion }}</span>
+                        @if (isReciente(post.fechaPublicacion)) {
+                          <span class="feed-entry__badge">Nuevo</span>
+                        }
+                      </div>
                       <h2 class="feed-entry__titulo">{{ post.titulo }}</h2>
+                      <span class="feed-entry__fecha">
+                        <i class="pi pi-calendar"></i>
+                        {{ formatFecha(post.fechaPublicacion) }}
+                      </span>
                       <p class="feed-entry__descripcion">{{ post.descripcion }}</p>
                       <p class="feed-entry__texto">{{ post.contenido }}</p>
                       <a [routerLink]="['/blog', post.slug]" class="feed-entry__btn">
@@ -104,6 +125,45 @@
           }
 
         </div>
+      }
+
+      <!-- ─── PAGINACIÓN ─────────────────────────────── -->
+      @if (totalPages > 1) {
+        <nav class="pagination" aria-label="Navegación de páginas">
+          <button
+            class="pagination__btn pagination__btn--arrow"
+            [disabled]="currentPage === 1"
+            (click)="goToPage(currentPage - 1)"
+            aria-label="Página anterior"
+          >
+            <i class="pi pi-chevron-left"></i>
+          </button>
+
+          @for (page of pages; track $index) {
+            @if (page === -1) {
+              <span class="pagination__ellipsis">…</span>
+            } @else {
+              <button
+                class="pagination__btn"
+                [class.pagination__btn--active]="page === currentPage"
+                (click)="goToPage(page)"
+                [attr.aria-label]="'Página ' + page"
+                [attr.aria-current]="page === currentPage ? 'page' : null"
+              >
+                {{ page }}
+              </button>
+            }
+          }
+
+          <button
+            class="pagination__btn pagination__btn--arrow"
+            [disabled]="currentPage === totalPages"
+            (click)="goToPage(currentPage + 1)"
+            aria-label="Página siguiente"
+          >
+            <i class="pi pi-chevron-right"></i>
+          </button>
+        </nav>
       }
 
     </div>
