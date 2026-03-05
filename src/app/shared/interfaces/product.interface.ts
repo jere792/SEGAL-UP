@@ -16,7 +16,12 @@ export type Tonalidad =
   | 'celeste'
   | 'menta'
   | 'lavanda'
-  | 'multicolor';
+  | 'multicolor'
+  | 'botella'
+  | 'vino'
+  | 'azulino'
+  | 'marino'
+    ;
 
 export interface Product {
   id: string;
