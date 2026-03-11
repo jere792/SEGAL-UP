@@ -4,7 +4,6 @@
 @use 'styles/base';
 @use 'styles/components';
 
-// ─── PAGE TRANSITION ─────────────────────────────────────
 @keyframes pageEnter {
   from {
     opacity: 0;
@@ -16,33 +15,7 @@
   }
 }
 
-router-outlet + * {
+body.app-ready router-outlet + * {
   display: block;
   animation: pageEnter 350ms ease-out both;
-}
-
-// ──────────────────────────────────────────────────────────────
-// AGREGAR AL FINAL DE src/styles.scss
-// Soluciona el lightbox con position:fixed en apps con animaciones
-// ──────────────────────────────────────────────────────────────
-
-// 1. Cuando el lightbox está abierto:
-//    - Quita overflow:hidden de .main-content para que fixed funcione
-//    - Neutraliza la animación pageEnter en app-root
-body.lightbox-open .main-content {
-  overflow: visible !important;
-}
-
-body.lightbox-open app-root,
-body.lightbox-open app-root > * {
-  animation: none !important;
-  transform: none !important;
-  filter: none !important;
-  will-change: auto !important;
-}
-
-// 2. El propio .lightbox nunca hereda pageEnter (por si acaso)
-.lightbox,
-.lightbox * {
-  animation-name: lb-scale, lb-fade, none;
 }
