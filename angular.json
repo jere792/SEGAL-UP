@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "segal-up": {
+    "vestizo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -71,10 +71,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "segal-up:build:production"
+              "buildTarget": "vestizo:build:production"
             },
             "development": {
-              "buildTarget": "segal-up:build:development"
+              "buildTarget": "vestizo:build:development"
             }
           },
           "defaultConfiguration": "development"
