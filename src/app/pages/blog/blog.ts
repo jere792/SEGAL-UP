@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { PageHero } from '../../shared/components/page-hero/page-hero';
@@ -15,10 +15,34 @@ const PAGE_SIZE = 10;
   styleUrl: './blog.scss',
 })
 export class Blog implements OnInit {
-  constructor(private title: Title) {}
+  constructor(
+    private title: Title,
+    private meta: Meta,
+  ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Blog - Vestizo');
+    this.title.setTitle('Blog de Moda | Colecciones Vestizo 2026 - Gamarra Lima');
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Descubre las últimas colecciones de Vestizo: Sofía, Veronica, Aylen, Ana y más. Tendencias de moda femenina exclusiva desde Gamarra, Lima. Temporada 2026.',
+    });
+    this.meta.updateTag({
+      name: 'keywords',
+      content:
+        'blog moda Lima, colecciones vestidos 2026, enterizos Gamarra, moda femenina Perú, tendencias ropa mujer Lima',
+    });
+    this.meta.updateTag({
+      property: 'og:title',
+      content: 'Blog de Moda | Colecciones Vestizo 2026',
+    });
+    this.meta.updateTag({
+      property: 'og:description',
+      content:
+        'Descubre las últimas colecciones de Vestizo. Moda femenina exclusiva desde Gamarra, Lima.',
+    });
+    this.meta.updateTag({ property: 'og:url', content: 'https://vestizo.vercel.app/blog' });
+    this.meta.updateTag({ name: 'robots', content: 'index, follow' });
   }
 
   posts: BlogPost[] = blogPosts.sort(
@@ -26,8 +50,6 @@ export class Blog implements OnInit {
   );
 
   viewMode: 'grid' | 'feed' = 'feed';
-
-  // ─── Paginación ───────────────────────────────────────
   currentPage = 1;
   pageSize = PAGE_SIZE;
 
@@ -43,18 +65,13 @@ export class Blog implements OnInit {
   get pages(): number[] {
     const total = this.totalPages;
     if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
-
     const pages: number[] = [];
     const delta = 2;
-    const left  = this.currentPage - delta;
+    const left = this.currentPage - delta;
     const right = this.currentPage + delta;
-
     for (let i = 1; i <= total; i++) {
-      if (i === 1 || i === total || (i >= left && i <= right)) {
-        pages.push(i);
-      }
+      if (i === 1 || i === total || (i >= left && i <= right)) pages.push(i);
     }
-
     const withEllipsis: number[] = [];
     let prev = 0;
     for (const p of pages) {
@@ -81,9 +98,9 @@ export class Blog implements OnInit {
 
   formatFecha(fecha: Date): string {
     return new Date(fecha).toLocaleDateString('es-PE', {
-      day:   '2-digit',
+      day: '2-digit',
       month: 'long',
-      year:  'numeric',
+      year: 'numeric',
     });
   }
 

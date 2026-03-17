@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { PageHero } from '../../shared/components/page-hero/page-hero';
 
@@ -23,10 +23,34 @@ interface FaqGroup {
   styleUrl: './preguntas-frecuentes.scss',
 })
 export class PreguntasFrecuentes implements OnInit {
-  constructor(private title: Title) {}
+  constructor(
+    private title: Title,
+    private meta: Meta,
+  ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Preguntas Frecuentes - Vestizo');
+    this.title.setTitle('Preguntas Frecuentes | Vestizo - Envíos, Tallas y Pagos');
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Resolvemos tus dudas sobre envíos a todo el Perú, tallas disponibles, medios de pago (Yape, Plin, Visa) y política de cambios. Atención por WhatsApp.',
+    });
+    this.meta.updateTag({
+      name: 'keywords',
+      content:
+        'preguntas frecuentes Vestizo, envíos Perú enterizos, tallas vestidos Lima, pago Yape Plin moda, cambios devoluciones ropa Lima',
+    });
+    this.meta.updateTag({ property: 'og:title', content: 'Preguntas Frecuentes | Vestizo' });
+    this.meta.updateTag({
+      property: 'og:description',
+      content:
+        'Resolvemos tus dudas sobre envíos, tallas, pagos y cambios. Atención personalizada por WhatsApp.',
+    });
+    this.meta.updateTag({
+      property: 'og:url',
+      content: 'https://vestizo.vercel.app/preguntas-frecuentes',
+    });
+    this.meta.updateTag({ name: 'robots', content: 'index, follow' });
   }
 
   grupos: FaqGroup[] = [

@@ -1,9 +1,14 @@
 import {
-  Component, OnInit, OnDestroy, HostListener,
-  PLATFORM_ID, Inject, ViewEncapsulation,
+  Component,
+  OnInit,
+  OnDestroy,
+  HostListener,
+  PLATFORM_ID,
+  Inject,
+  ViewEncapsulation,
   Renderer2,
 } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule, isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { products } from '../../core/data/products.data/products.data';
@@ -11,6 +16,7 @@ import { Product } from '../../shared/interfaces/product.interface';
 import { WhatsappService } from '../../shared/services/whatsapp.service';
 import { PageHero } from '../../shared/components/page-hero/page-hero';
 
+// ... (interfaces y constantes igual que antes)
 interface Filtros {
   soloDisponibles: boolean;
   precioMin: number;
@@ -58,7 +64,6 @@ export class Catalogo implements OnInit, OnDestroy {
   sortBy = '';
   viewMode: 'grid4' | 'grid3' | 'list' = 'grid4';
 
-  // ─── Paginación ───────────────────────────────────────
   currentPage = 1;
   pageSize = PAGE_SIZE;
 
@@ -71,7 +76,7 @@ export class Catalogo implements OnInit, OnDestroy {
     if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
     const pages: number[] = [];
     const delta = 2;
-    const left  = this.currentPage - delta;
+    const left = this.currentPage - delta;
     const right = this.currentPage + delta;
     for (let i = 1; i <= total; i++) {
       if (i === 1 || i === total || (i >= left && i <= right)) pages.push(i);
@@ -86,18 +91,20 @@ export class Catalogo implements OnInit, OnDestroy {
     return withEllipsis;
   }
 
-  // ─── Lightbox ─────────────────────────────────────────
   lightboxProduct: Product | null = null;
   lightboxIndex = 0;
   private lightboxEl: HTMLElement | null = null;
 
-  get lightboxOpen(): boolean { return this.lightboxProduct !== null; }
+  get lightboxOpen(): boolean {
+    return this.lightboxProduct !== null;
+  }
 
   private activeImageIndex: Record<string, number> = {};
 
   constructor(
     private whatsapp: WhatsappService,
     private title: Title,
+    private meta: Meta,
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: object,
     @Inject(DOCUMENT) private document: Document,
@@ -113,9 +120,33 @@ export class Catalogo implements OnInit, OnDestroy {
     this.tonalidadesUnicas = [...new Set(this.allProducts.flatMap((p) => p.tonalidades))].sort();
     this.aplicarFiltros();
     if (isPlatformBrowser(this.platformId)) this.precargarImagenes();
-    this.title.setTitle('Catálogo - Vestizo');
+
+    // SEO
+    this.title.setTitle('Catálogo de Enterizos y Vestidos 2026 | Vestizo - Gamarra Lima');
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Explora nuestro catálogo completo de enterizos y vestidos exclusivos 2026. Colecciones Sofía, Veronica, Aylen y más. Envíos a todo el Perú desde Gamarra, Lima.',
+    });
+    this.meta.updateTag({
+      name: 'keywords',
+      content:
+        'catálogo enterizos Lima, vestidos exclusivos Gamarra, ropa mujer 2026, enterizos colección, moda femenina Perú',
+    });
+    this.meta.updateTag({
+      property: 'og:title',
+      content: 'Catálogo 2026 | Vestizo - Enterizos y Vestidos Exclusivos',
+    });
+    this.meta.updateTag({
+      property: 'og:description',
+      content:
+        'Explora nuestro catálogo completo. Más de 20 modelos exclusivos con envíos a todo el Perú.',
+    });
+    this.meta.updateTag({ property: 'og:url', content: 'https://vestizo.vercel.app/catalogo' });
+    this.meta.updateTag({ name: 'robots', content: 'index, follow' });
   }
 
+  // ... todo el resto del archivo igual que antes (métodos, lightbox, filtros, etc.)
   ngOnDestroy(): void {
     this.destroyLightbox();
     if (isPlatformBrowser(this.platformId)) {
@@ -124,33 +155,33 @@ export class Catalogo implements OnInit, OnDestroy {
   }
 
   private precargarImagenes(): void {
-    this.allProducts.forEach(p => p.imagenes.forEach(url => {
-      const img = new Image(); img.src = url;
-    }));
+    this.allProducts.forEach((p) =>
+      p.imagenes.forEach((url) => {
+        const img = new Image();
+        img.src = url;
+      }),
+    );
   }
 
-  // ─── Lightbox: abrir (crea el nodo UNA sola vez) ──────
   openLightbox(product: Product, e: Event): void {
     e.preventDefault();
     e.stopPropagation();
     this.lightboxProduct = product;
-    this.lightboxIndex   = this.activeImageIndex[product.id] ?? 0;
+    this.lightboxIndex = this.activeImageIndex[product.id] ?? 0;
     if (!isPlatformBrowser(this.platformId)) return;
     this.document.body.style.overflow = 'hidden';
     this.createLightboxEl(product);
   }
 
-  // ─── Lightbox: cerrar ─────────────────────────────────
   closeLightbox(): void {
     this.lightboxProduct = null;
-    this.lightboxIndex   = 0;
+    this.lightboxIndex = 0;
     if (isPlatformBrowser(this.platformId)) {
       this.document.body.style.overflow = '';
     }
     this.destroyLightbox();
   }
 
-  // ─── Lightbox: navegar (solo actualiza, NO recrea) ────
   lightboxNext(): void {
     if (!this.lightboxProduct) return;
     this.lightboxIndex = (this.lightboxIndex + 1) % this.lightboxProduct.imagenes.length;
@@ -169,43 +200,39 @@ export class Catalogo implements OnInit, OnDestroy {
     this.updateLightboxSlide();
   }
 
-  // ─── DOM helpers ─────────────────────────────────────
-
-  /** Crea el nodo del lightbox y lo appende al body UNA vez */
   private createLightboxEl(product: Product): void {
-    this.destroyLightbox(); // por si acaso
-
+    this.destroyLightbox();
     const total = product.imagenes.length;
-    const idx   = this.lightboxIndex;
-
-    const thumbsHtml = total > 1 ? `
+    const idx = this.lightboxIndex;
+    const thumbsHtml =
+      total > 1
+        ? `
       <div class="lightbox__thumbs" id="lb-thumbs">
-        ${product.imagenes.map((img, i) => `
-          <button class="lightbox__thumb${i === idx ? ' lightbox__thumb--active' : ''}"
-            data-goto="${i}">
+        ${product.imagenes
+          .map(
+            (img, i) => `
+          <button class="lightbox__thumb${i === idx ? ' lightbox__thumb--active' : ''}" data-goto="${i}">
             <img src="${img}" alt="${product.nombre} ${i + 1}" />
-          </button>`).join('')}
-      </div>` : '';
-
-    const arrowsHtml = total > 1 ? `
-      <button class="lightbox__arrow lightbox__arrow--prev" id="lb-prev">
-        <i class="pi pi-chevron-left"></i>
-      </button>
-      <button class="lightbox__arrow lightbox__arrow--next" id="lb-next">
-        <i class="pi pi-chevron-right"></i>
-      </button>` : '';
-
-    const counterHtml = total > 1
-      ? `<span class="lightbox__counter" id="lb-counter">${idx + 1} / ${total}</span>`
-      : '';
-
+          </button>`,
+          )
+          .join('')}
+      </div>`
+        : '';
+    const arrowsHtml =
+      total > 1
+        ? `
+      <button class="lightbox__arrow lightbox__arrow--prev" id="lb-prev"><i class="pi pi-chevron-left"></i></button>
+      <button class="lightbox__arrow lightbox__arrow--next" id="lb-next"><i class="pi pi-chevron-right"></i></button>`
+        : '';
+    const counterHtml =
+      total > 1
+        ? `<span class="lightbox__counter" id="lb-counter">${idx + 1} / ${total}</span>`
+        : '';
     const precioHtml = product.precio
       ? `<span class="lightbox__precio">S/ ${product.precio.toFixed(2)}</span>`
       : '';
-
     const el = this.document.createElement('div');
     el.className = 'lightbox';
-    // Importante: animation: none evita que hereden pageEnter
     el.style.cssText = 'animation:none!important;';
     el.innerHTML = `
       <div class="lightbox__content" style="animation:lb-scale .22s cubic-bezier(.22,1,.36,1) both">
@@ -232,49 +259,42 @@ export class Catalogo implements OnInit, OnDestroy {
           </div>
         </div>
       </div>`;
-
-    // Eventos — todos con stopPropagation para no llegar al backdrop
-    el.addEventListener('click', ev => { if (ev.target === el) this.closeLightbox(); });
+    el.addEventListener('click', (ev) => {
+      if (ev.target === el) this.closeLightbox();
+    });
     el.querySelector('#lb-close')!.addEventListener('click', () => this.closeLightbox());
-    el.querySelector('#lb-wsp')!.addEventListener('click', ev => {
+    el.querySelector('#lb-wsp')!.addEventListener('click', (ev) => {
       ev.stopPropagation();
       if (this.lightboxProduct) this.whatsapp.openProduct(this.lightboxProduct);
     });
-    el.querySelector('#lb-prev')?.addEventListener('click', ev => {
-      ev.stopPropagation(); this.lightboxPrev();
+    el.querySelector('#lb-prev')?.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      this.lightboxPrev();
     });
-    el.querySelector('#lb-next')?.addEventListener('click', ev => {
-      ev.stopPropagation(); this.lightboxNext();
+    el.querySelector('#lb-next')?.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      this.lightboxNext();
     });
-    el.querySelectorAll('[data-goto]').forEach(btn => {
-      btn.addEventListener('click', ev => {
+    el.querySelectorAll('[data-goto]').forEach((btn) => {
+      btn.addEventListener('click', (ev) => {
         ev.stopPropagation();
         this.lightboxGoTo(parseInt((btn as HTMLElement).dataset['goto']!, 10));
       });
     });
-
     this.document.body.appendChild(el);
     this.lightboxEl = el;
   }
 
-  /** Actualiza solo imagen, thumbnails activos y contador — SIN recrear el nodo */
   private updateLightboxSlide(): void {
     const el = this.lightboxEl;
-    const p  = this.lightboxProduct;
+    const p = this.lightboxProduct;
     if (!el || !p) return;
-
     const idx = this.lightboxIndex;
-
-    // Imagen principal
     const img = el.querySelector<HTMLImageElement>('#lb-img');
     if (img) img.src = p.imagenes[idx];
-
-    // Thumbnails: quita y pone clase activa
     el.querySelectorAll<HTMLElement>('[data-goto]').forEach((btn, i) => {
       btn.classList.toggle('lightbox__thumb--active', i === idx);
     });
-
-    // Contador
     const counter = el.querySelector('#lb-counter');
     if (counter) counter.textContent = `${idx + 1} / ${p.imagenes.length}`;
   }
@@ -287,47 +307,65 @@ export class Catalogo implements OnInit, OnDestroy {
   @HostListener('document:keydown', ['$event'])
   onKeydown(e: KeyboardEvent): void {
     if (!this.lightboxOpen) return;
-    if (e.key === 'Escape')     this.closeLightbox();
+    if (e.key === 'Escape') this.closeLightbox();
     if (e.key === 'ArrowRight') this.lightboxNext();
-    if (e.key === 'ArrowLeft')  this.lightboxPrev();
+    if (e.key === 'ArrowLeft') this.lightboxPrev();
   }
 
-  // ─── Filtros ──────────────────────────────────────────
-  toggleFilter(key: string): void { this.openFilters[key] = !this.openFilters[key]; }
+  toggleFilter(key: string): void {
+    this.openFilters[key] = !this.openFilters[key];
+  }
 
   toggleCategoria(cat: string): void {
     const idx = this.filtros.categorias.indexOf(cat);
-    if (idx > -1) this.filtros.categorias.splice(idx, 1); else this.filtros.categorias.push(cat);
+    if (idx > -1) this.filtros.categorias.splice(idx, 1);
+    else this.filtros.categorias.push(cat);
     this.aplicarFiltros();
   }
 
   toggleTonalidad(ton: string): void {
     const idx = this.filtros.tonalidades.indexOf(ton);
-    if (idx > -1) this.filtros.tonalidades.splice(idx, 1); else this.filtros.tonalidades.push(ton);
+    if (idx > -1) this.filtros.tonalidades.splice(idx, 1);
+    else this.filtros.tonalidades.push(ton);
     this.aplicarFiltros();
   }
 
   aplicarFiltros(): void {
     let result = [...this.allProducts];
-    if (this.filtros.soloDisponibles) result = result.filter(p => p.disponible);
-    result = result.filter(p => {
+    if (this.filtros.soloDisponibles) result = result.filter((p) => p.disponible);
+    result = result.filter((p) => {
       const precio = p.precio ?? 0;
       return precio >= this.filtros.precioMin && precio <= this.filtros.precioMax;
     });
     if (this.filtros.categorias.length > 0)
-      result = result.filter(p => this.filtros.categorias.includes(p.categoria));
+      result = result.filter((p) => this.filtros.categorias.includes(p.categoria));
     if (this.filtros.tonalidades.length > 0)
-      result = result.filter(p => p.tonalidades.some(t => this.filtros.tonalidades.includes(t)));
-
+      result = result.filter((p) =>
+        p.tonalidades.some((t) => this.filtros.tonalidades.includes(t)),
+      );
     switch (this.sortBy) {
-      case 'nombre_asc':  result.sort((a, b) => a.nombre.localeCompare(b.nombre)); break;
-      case 'nombre_desc': result.sort((a, b) => b.nombre.localeCompare(a.nombre)); break;
-      case 'precio_asc':  result.sort((a, b) => (a.precio ?? 0) - (b.precio ?? 0)); break;
-      case 'precio_desc': result.sort((a, b) => (b.precio ?? 0) - (a.precio ?? 0)); break;
+      case 'nombre_asc':
+        result.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        break;
+      case 'nombre_desc':
+        result.sort((a, b) => b.nombre.localeCompare(a.nombre));
+        break;
+      case 'precio_asc':
+        result.sort((a, b) => (a.precio ?? 0) - (b.precio ?? 0));
+        break;
+      case 'precio_desc':
+        result.sort((a, b) => (b.precio ?? 0) - (a.precio ?? 0));
+        break;
       case 'fecha_desc':
-        result.sort((a, b) => new Date(b.fechaCreacion).getTime() - new Date(a.fechaCreacion).getTime()); break;
+        result.sort(
+          (a, b) => new Date(b.fechaCreacion).getTime() - new Date(a.fechaCreacion).getTime(),
+        );
+        break;
       case 'fecha_asc':
-        result.sort((a, b) => new Date(a.fechaCreacion).getTime() - new Date(b.fechaCreacion).getTime()); break;
+        result.sort(
+          (a, b) => new Date(a.fechaCreacion).getTime() - new Date(b.fechaCreacion).getTime(),
+        );
+        break;
     }
     this.productosFiltrados = result;
     this.currentPage = 1;
@@ -344,7 +382,9 @@ export class Catalogo implements OnInit, OnDestroy {
     this.currentPage = page;
     this.actualizarPagina();
     if (isPlatformBrowser(this.platformId)) {
-      this.document.querySelector('.catalogo-main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      this.document
+        .querySelector('.catalogo-main')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
@@ -360,25 +400,32 @@ export class Catalogo implements OnInit, OnDestroy {
     this.aplicarFiltros();
   }
 
-  getImageIndex(id: string): number { return this.activeImageIndex[id] ?? 0; }
+  getImageIndex(id: string): number {
+    return this.activeImageIndex[id] ?? 0;
+  }
 
   nextImage(id: string, total: number, e: Event): void {
-    e.preventDefault(); e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
     this.activeImageIndex[id] = ((this.activeImageIndex[id] ?? 0) + 1) % total;
   }
 
   prevImage(id: string, total: number, e: Event): void {
-    e.preventDefault(); e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
     const c = this.activeImageIndex[id] ?? 0;
     this.activeImageIndex[id] = (c - 1 + total) % total;
   }
 
   setImage(id: string, index: number, e: Event): void {
-    e.preventDefault(); e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
     this.activeImageIndex[id] = index;
   }
 
-  contactar(product: Product): void { this.whatsapp.openProduct(product); }
+  contactar(product: Product): void {
+    this.whatsapp.openProduct(product);
+  }
 
   isNew(product: Product): boolean {
     const limite = new Date();
@@ -388,7 +435,9 @@ export class Catalogo implements OnInit, OnDestroy {
 
   formatFecha(fecha: Date): string {
     return new Date(fecha).toLocaleDateString('es-PE', {
-      day: '2-digit', month: 'short', year: 'numeric',
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
     });
   }
 }
